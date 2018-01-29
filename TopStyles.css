@@ -1,0 +1,26 @@
+body{
+	font-family:Arial;
+}
+#links li{
+	display: inline-block;
+	text-align: center;
+	font-size:2em;
+	font-weight:bold;
+}
+#links li:hover{
+	background-color:
+}
+.loggedout{
+	display: none;
+}
+.col-2{
+	width:16%;
+}
+.col-3{
+	width:24%;
+	margin:0;
+}
+.col-12{
+	width:100%;
+	margin:0;
+}
