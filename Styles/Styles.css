@@ -1,0 +1,42 @@
+body {
+    padding-top: 50px;
+    background-color: #f5f5f5;
+}
+.starter-template {
+    padding: 40px 15px;
+    text-align: center;
+}
+.adSmall{
+    margin: 1vw;
+    padding: 1vw;
+    background-color: white;
+    border-radius: 1vw;
+    border: 2px solid gray;
+}
+.adSmall img{
+    width:100%;
+    border-radius:50%;
+    border:2px solid gray;
+}
+.adSmall h1{
+    padding-left:5%;
+    width:40%;
+    float:right;
+    display:inline-block;
+}
+.adSmall p{
+    padding-top:1%;
+}
+.imageWrap{
+    width: 40%;
+    display:inline-block;
+}
+#login{
+    display: inline-block;
+    float:right;
+}
+#login p{
+    display: inline-block;
+    color: #eee;
+    padding: 15px 5px 4px 0px;
+}
