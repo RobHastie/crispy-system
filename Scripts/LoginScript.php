@@ -7,7 +7,22 @@
  */
 session_start();
 
-
+if(isset($_POST['Email'])){
+    $email = $_SESSION['Email'];
+    echo $email . '<br>';
+    if(isset($_POST['Password'])){
+        $password = $_POST['Password'];
+        if(validateLogin($email, $password)){
+            echo 'Success';
+        }else{
+            echo 'Invalid Login';
+        }
+    }else{
+        echo 'No Password';
+    }
+}else{
+    echo 'No Email';
+}
 
 function setUpHandler()
 {
@@ -28,4 +43,17 @@ function sessionInitialize(){
     }
     //If the session value loggedin is not set, set it to false.
     //This makes it so that the site can maintain knowledge of whether a user has loggedin or not
+}
+function validateLogin($email, $password){
+    $dbHandler = setUpHandler();
+    $sqlQuery = "SELECT password FROM Users WHERE useremail = '$email'";
+    echo $sqlQuery . "<br>";
+    $data = $dbHandler->prepare($sqlQuery);
+    $data->execute();
+    $pwhash = $data->fetch();
+    if (password_verify($password, $pwhash[0])) {
+        return true;
+    } else {
+        return false;
+    }
 }
