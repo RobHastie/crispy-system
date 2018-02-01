@@ -8,7 +8,7 @@
 
 
 
-createUser('0000000002','Password','Test2@Gmail.com','12 Three Road', '07654789013', 'Description');
+createUser('0000000003','Password','Test3@Gmail.com','13 Three Road', '07654789014', 'Description');
 
 function createUser($id, $password, $email, $address, $mobile, $desc){
     $hash = password_hash($password, PASSWORD_DEFAULT);

@@ -6,5 +6,6 @@
  * Time: 04:13 PM
  */
 session_start();
+
 require_once 'TopBar.html';
 require_once 'adPage.html';
