@@ -1,0 +1,20 @@
+Functionality:
+
+Login: y
+
+Upload ad:
+
+Search ads:
+
+Watch Ads:
+
+Create Account:
+	Captcha:
+
+Admin functionality:
+
+DDOS protection:
+
+Validation: 
+
+Security: 

@@ -48,3 +48,23 @@ body {
     color: #eee;
     padding: 15px 5px 4px 0px;
 }
+#lga{
+    display:none;
+}
+#logout{
+    padding: 5px 5px 5px 5px;
+    background-color: steelblue;
+    color: black;
+    border-radius: 3px;
+    margin-right: 2vw;
+    margin-left: 20px;
+}
+#loginbutton{
+    padding: 5px 5px 5px 5px;
+    background-color: steelblue;
+    color: black;
+    border-radius: 3px;
+    margin-right: 2vw;
+    border: 0px;
+
+}

@@ -22,7 +22,8 @@ function sessionInitialize(){
     if(!isset($_SESSION['loggedin']))
     {
         $_SESSION['loggedin'] = false;
+        $_SESSION['Admin'] = false;
     }
-    //If the session value loggedin is not set, set it to false.
-    //This makes it so that the site can maintain knowledge of whether a user has loggedin or not
+    //If the session value loggedin is not set, set it and Admin to false.
+    //This helps maintain the things on the site that depend on their values.
 }

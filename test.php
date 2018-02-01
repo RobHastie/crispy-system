@@ -7,8 +7,14 @@
  */
 
 
+session_start();
+echo 'done';
+//createUser('0000000003','Password','Test3@Gmail.com','13 Three Road', '07654789014', 'Description');
 
-createUser('0000000003','Password','Test3@Gmail.com','13 Three Road', '07654789014', 'Description');
+
+
+session_unset();
+session_destroy();
 
 function createUser($id, $password, $email, $address, $mobile, $desc){
     $hash = password_hash($password, PASSWORD_DEFAULT);
