@@ -17,15 +17,24 @@ class AdThumbnail{
         $this->image = $img;
     }
 
-    function printThumbnail{
-
+    public function printThumbnail(){
+        echo '<div class="col-md-6 col-lg-4">',
+        '<div class="adSmall">',
+          '<div class="imageWrap"><img src="../images/' . $this->image . '"></div>',
+            '<h1>' . $this->adName. '</h1>',
+            '<p>' . $this->description .'</p>',
+        '</div>',
+        '</div>';
     }
 }
 function searchWatchedAds(){
     try {
         $list = array();
-        $userid = $_SESSION['userID'];
-        //$adid = $_GET['adid'];
+        if(isset($_SESSION['userID'])) {
+            $userid = $_SESSION['userID'];
+        }else{
+            return false;
+        }
         $dbHandle = setUpHandler();
         $dbHandle->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $sqlQuery = "SELECT * FROM Watchlist WHERE userID = '$userid'";
@@ -44,8 +53,9 @@ function searchWatchedAds(){
             $ad = new AdThumbnail($adDetails[0],$adDetails[1],$adDetails[2]);
             $list[$loop] = $ad;
         }
-
+        return $list;
     }catch(PDOException $e){
         echo $sqlQuery . "<br>" . $e->getMessage();
     }
+    return false;
 }

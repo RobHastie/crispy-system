@@ -10,14 +10,19 @@ require_once 'Scripts/CommonFunctions.php';
 session_start();
 sessionInitialize();
 
-if(!$_SESSION['loggedin'] == true){
+if(!$_SESSION['loggedin'] == true OR !isset($_SESSION['userid'])){
     header("Location: index.php");
 }
 require_once 'TopBar.html';
 require_once 'Views/WatchedAds.html';
 echo '<script type="text/javascript">',
-'document.getElementById("loginform").style.display = "none";',
-'document.getElementById("lga").style.display = "inline-block";',
+    'document.getElementById("loginform").style.display = "none";',
+    'document.getElementById("lga").style.display = "inline-block";',
     'document.getElementById("lgat").innerHTML = "Logged in as: '. $_SESSION['Email'] . '";',
-'</script>';
+    '</script>';
 
+require_once 'Scripts/ListAds.php';
+$list = searchWatchedAds();
+foreach ($list as &$ad){
+    $ad->printThumbnail();
+}
