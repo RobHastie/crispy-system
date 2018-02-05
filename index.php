@@ -9,7 +9,7 @@ require_once 'Scripts/CommonFunctions.php';
 session_start();
 sessionInitialize();
 require_once 'TopBar.html';
-require_once 'adPage.html';
+require_once 'Pages/adPage.html';
 
 if($_SESSION['loggedin'] == true){
     echo '<script type="text/javascript">',

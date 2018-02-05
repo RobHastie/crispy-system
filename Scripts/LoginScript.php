@@ -41,13 +41,14 @@ if(isset($_POST['Email'])){
 
 function validateLogin($email, $password){
     $dbHandler = setUpHandler();
-    $sqlQuery = "SELECT password FROM Users WHERE useremail = '$email'";
+    $sqlQuery = "SELECT password, userID FROM Users WHERE useremail = '$email'";
     echo $sqlQuery . "<br>";
     $data = $dbHandler->prepare($sqlQuery);
     $data->execute();
     $pwhash = $data->fetch();
     if (password_verify($password, $pwhash[0])) {
         //Check the password versus the stored encrypted password for the chosen email.
+        $_SESSION['userID'] = $pwhash[1];
         return true;
     } else {
         return false;
