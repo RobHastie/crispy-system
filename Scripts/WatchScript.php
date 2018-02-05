@@ -10,11 +10,11 @@ session_start();
 sessionInitialize();
 
 try {
-    $email = $_SESSION['Email'];
+    $userid = $_SESSION['userID'];
     $adid = $_GET['adid'];
     $dbHandle = setUpHandler();
     $dbHandle->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $sqlQuery = "INSERT INTO Watchlist VALUES ('$email', '$adid')";
+    $sqlQuery = "INSERT INTO Watchlist VALUES ('$userid', '$adid')";
     echo $sqlQuery . "<br>";
 
     $dbHandle->exec($sqlQuery);

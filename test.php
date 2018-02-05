@@ -10,11 +10,13 @@
 session_start();
 
 //createUser('Password', 'Test3@Gmail.com', '12 Three Road', '01908723', 'Description');
-$imgArray = array('123456789','098765432');
+/*$imgArray = array('113456789','099765432');
 $captionArray = array('First image', 'Second image');
-$_SESSION['userID'] = '0000000001';
+$_SESSION['userID'] = '0000000002';
 createAdvert('Red phone','A phone that is red', 'Here', $imgArray, $captionArray, 'Blue');
-
+*/
+$_SESSION['userID'] = '0000000001';
+watchAd('000000000000001');
 session_unset();
 session_destroy();
 
@@ -87,4 +89,22 @@ function setUpHandler()
     return $dbHandler;
     //Set up the PHP Database Object according to the values at the top, then return the PDO
     //This way, the Database Details are only in one place and are easy to change.
+}
+
+function watchAd($adid){
+    try {
+        $userid = $_SESSION['userID'];
+        //$adid = $_GET['adid'];
+        $dbHandle = setUpHandler();
+        $dbHandle->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sqlQuery = "INSERT INTO Watchlist VALUES ('$adid', '$userid')";
+        echo $sqlQuery . "<br>";
+
+        $dbHandle->exec($sqlQuery);
+        $dbHandle = null;
+        return true;
+
+    }catch(PDOException $e){
+        echo $sqlQuery . "<br>" . $e->getMessage();
+    }
 }
