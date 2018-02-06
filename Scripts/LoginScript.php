@@ -48,7 +48,7 @@ function validateLogin($email, $password){
     $pwhash = $data->fetch();
     if (password_verify($password, $pwhash[0])) {
         //Check the password versus the stored encrypted password for the chosen email.
-        $_SESSION['userID'] = $pwhash[1];
+        $_SESSION['userid'] = $pwhash[1];
         return true;
     } else {
         return false;

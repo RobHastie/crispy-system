@@ -30,8 +30,8 @@ class AdThumbnail{
 function searchWatchedAds(){
     try {
         $list = array();
-        if(isset($_SESSION['userID'])) {
-            $userid = $_SESSION['userID'];
+        if(isset($_SESSION['userid'])) {
+            $userid = $_SESSION['userid'];
         }else{
             return false;
         }
@@ -52,6 +52,7 @@ function searchWatchedAds(){
             $adDetails = $fetch2->fetch();
             $ad = new AdThumbnail($adDetails[0],$adDetails[1],$adDetails[2]);
             $list[$loop] = $ad;
+            $loop++;
         }
         return $list;
     }catch(PDOException $e){

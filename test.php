@@ -10,13 +10,13 @@
 session_start();
 
 //createUser('Password', 'Test3@Gmail.com', '12 Three Road', '01908723', 'Description');
-/*$imgArray = array('113456789','099765432');
-$captionArray = array('First image', 'Second image');
-$_SESSION['userID'] = '0000000002';
-createAdvert('Red phone','A phone that is red', 'Here', $imgArray, $captionArray, 'Blue');
-*/
+$img = '423456789';
+$caption = 'First image';
 $_SESSION['userID'] = '0000000001';
-watchAd('000000000000001');
+createAdvert('Red phone','A phone that is red', 'Here', $img, $caption, 'Blue', 250);
+
+$_SESSION['userID'] = '0000000002';
+watchAd('000000000000003');
 session_unset();
 session_destroy();
 
@@ -49,7 +49,7 @@ function createUser($password, $email, $address, $mobile, $desc){
     //This function inserts a user record into the database
 }
 
-function createAdvert($name,$desc,$loc,$imgaddress,$caption,$colour){
+function createAdvert($name,$desc,$loc,$imgaddress,$caption,$colour, $price){
     $dbHandle = setUpHandler();
     $dbHandle->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $sqlQuery = "SELECT count(*) FROM classifieds";
@@ -66,7 +66,7 @@ function createAdvert($name,$desc,$loc,$imgaddress,$caption,$colour){
     try {
         $dbHandle = setUpHandler();
         $dbHandle->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sqlQuery = "INSERT INTO classifieds VALUES ('$number', '$name', '$desc', '$loc', '$imgaddress[0]', '$imgaddress[1]', '$caption[0]', '$caption[1]','$date','$colour','$userID')";
+        $sqlQuery = "INSERT INTO classifieds VALUES ('$number', '$name', '$desc', '$loc', '$imgaddress', '$caption','$date','$colour','$userID', '$price')";
         echo $sqlQuery . "<br>";
 
         $dbHandle->exec($sqlQuery);
