@@ -9,8 +9,12 @@
 
 session_start();
 
+$imageaddress = uniqid();
+
+echo $imageaddress;
+
 //createUser('Password', 'Test3@Gmail.com', '12 Three Road', '01908723', 'Description');
-$img = '423456789';
+/*$img = '423456789';
 $caption = 'First image';
 $_SESSION['userID'] = '0000000001';
 createAdvert('Red phone','A phone that is red', 'Here', $img, $caption, 'Blue', 250);
@@ -18,7 +22,7 @@ createAdvert('Red phone','A phone that is red', 'Here', $img, $caption, 'Blue', 
 $_SESSION['userID'] = '0000000002';
 watchAd('000000000000003');
 session_unset();
-session_destroy();
+session_destroy();*/
 
 function createUser($password, $email, $address, $mobile, $desc){
     $hash = password_hash($password, PASSWORD_DEFAULT);
