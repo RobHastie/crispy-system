@@ -10,11 +10,13 @@ class AdThumbnail{
     public $adName;
     public $image;
     public $description;
+    public $price;
 
-    function __construct($name,$desc,$img){
+    function __construct($name,$desc,$img, $price){
         $this->adName = $name;
         $this->description = $desc;
         $this->image = $img;
+        $this->price = $price;
     }
 
     public function printThumbnail(){
@@ -23,6 +25,7 @@ class AdThumbnail{
           '<div class="imageWrap"><img src="../images/' . $this->image . '"></div>',
             '<h1>' . $this->adName. '</h1>',
             '<p>' . $this->description .'</p>',
+            '<p>' . $this->price . '</p>',
         '</div>',
         '</div>';
     }
@@ -45,12 +48,12 @@ function searchWatchedAds(){
         while($ads = $fetch->fetch()){
             $dbHandle2 = setUpHandler();
             $dbHandle2->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $sqlQuery = "SELECT adname, addesc, image1address FROM classifieds WHERE adID = '$ads[0]'";
+            $sqlQuery = "SELECT adname, addesc, image1address, price FROM classifieds WHERE adID = '$ads[0]'";
 
             $fetch2 = $dbHandle2->prepare($sqlQuery);
             $fetch2->execute();
             $adDetails = $fetch2->fetch();
-            $ad = new AdThumbnail($adDetails[0],$adDetails[1],$adDetails[2]);
+            $ad = new AdThumbnail($adDetails[0],$adDetails[1],$adDetails[2],$adDetails[3]);
             $list[$loop] = $ad;
             $loop++;
         }

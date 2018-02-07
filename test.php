@@ -9,19 +9,14 @@
 
 session_start();
 
-$imageaddress = uniqid();
-
-echo $imageaddress;
 
 //createUser('Password', 'Test3@Gmail.com', '12 Three Road', '01908723', 'Description');
-/*$img = '423456789';
-$caption = 'First image';
-$_SESSION['userID'] = '0000000001';
-createAdvert('Red phone','A phone that is red', 'Here', $img, $caption, 'Blue', 250);
 
-$_SESSION['userID'] = '0000000002';
-watchAd('000000000000003');
-session_unset();
+$_SESSION['userid'] = '0000000001';
+
+watchAd('000000000000005');
+echo "testing" . "<br>";
+/*session_unset();
 session_destroy();*/
 
 function createUser($password, $email, $address, $mobile, $desc){
@@ -97,7 +92,7 @@ function setUpHandler()
 
 function watchAd($adid){
     try {
-        $userid = $_SESSION['userID'];
+        $userid = $_SESSION['userid'];
         //$adid = $_GET['adid'];
         $dbHandle = setUpHandler();
         $dbHandle->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

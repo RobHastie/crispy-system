@@ -49,6 +49,8 @@ $imageAddress = "../images/" . $imageName;
 
 if(createAdvert($_POST['adname'],$_POST['addesc'],$_POST['location'],$imageName,$_POST['caption'],$_POST['colour'],$_POST['price'])){
     move_uploaded_file($_FILES['picture']['tmp_name'], $imageAddress);
+}else{
+    echo "bugger.";
 }
 function createAdvert($name,$desc,$loc,$imgaddress,$caption,$colour, $price){
     $dbHandle = setUpHandler();
@@ -63,7 +65,7 @@ function createAdvert($name,$desc,$loc,$imgaddress,$caption,$colour, $price){
 
     $date = date('Y-m-d');
     $dbHandle = null;
-    $userID = $_SESSION['userID'];
+    $userID = $_SESSION['userid'];
     try {
         $dbHandle = setUpHandler();
         $dbHandle->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
