@@ -9,12 +9,13 @@ require_once 'Scripts/CommonFunctions.php';
 session_start();
 sessionInitialize();
 require_once 'TopBar.html';
-require_once 'Views/adPage.html';
+require_once 'Views/MainPage.html';
 
 if($_SESSION['loggedin'] == true){
+    loggedinas();
+}else{
     echo '<script type="text/javascript">',
-    'document.getElementById("loginform").style.display = "none";',
-    'document.getElementById("lga").style.display = "inline-block";',
-    'document.getElementById("lgat").innerHTML = "Logged in as: '. $_SESSION['Email'] . '";',
+    'document.getElementById("lga").style.display = "none";',
+    'document.getElementById("loginform").style.display = "inline-block";',
     '</script>';
 }

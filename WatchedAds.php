@@ -15,11 +15,7 @@ if(!$_SESSION['loggedin'] == true OR !isset($_SESSION['userid'])){
 }
 require_once 'TopBar.html';
 require_once 'Views/WatchedAds.html';
-echo '<script type="text/javascript">',
-    'document.getElementById("loginform").style.display = "none";',
-    'document.getElementById("lga").style.display = "inline-block";',
-    'document.getElementById("lgat").innerHTML = "Logged in as: '. $_SESSION['Email'] . '";',
-    '</script>';
+loggedinas();
 
 require_once 'Scripts/ListAds.php';
 $list = searchWatchedAds();

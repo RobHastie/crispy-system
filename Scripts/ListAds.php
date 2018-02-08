@@ -25,7 +25,7 @@ class AdThumbnail{
           '<div class="imageWrap"><img src="../images/' . $this->image . '"></div>',
             '<h1>' . $this->adName. '</h1>',
             '<p>' . $this->description .'</p>',
-            '<p>' . $this->price . '</p>',
+            '<p>Price: £' . $this->price . '</p>',
         '</div>',
         '</div>';
     }

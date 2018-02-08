@@ -15,11 +15,7 @@ require_once 'Views/CreateAd.html';
 if(!$_SESSION['loggedin'] == true OR !isset($_SESSION['userid'])){
     header("Location: index.php");
 }
-echo '<script type="text/javascript">',
-'document.getElementById("loginform").style.display = "none";',
-'document.getElementById("lga").style.display = "inline-block";',
-    'document.getElementById("lgat").innerHTML = "Logged in as: '. $_SESSION['Email'] . '";',
-'</script>';
+loggedinas();
 
 if($_SESSION['redirect'] == 1){
     $_SESSION['redirect'] = 0;

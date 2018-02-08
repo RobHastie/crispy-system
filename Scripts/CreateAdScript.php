@@ -16,11 +16,7 @@ if(!isset($_FILES['picture']) or !isset($_POST['caption']) or !isset($_POST['adn
     exit;
 }
 
-echo "Testing. Testing." . "<br>";
-
 $imageName = uniqid();
-
-echo $imageName . "<br>";
 
 $finfo = finfo_open(FILEINFO_MIME);
 $fileDetails = finfo_file($finfo, $_FILES['picture']['tmp_name']);
@@ -33,7 +29,7 @@ if($extension[0] != "image/png;" && $extension[0] != "image/gif;" && $extension[
     $_SESSION['redirect'] = 2;
     header("Location: ../CreateAd.php");
     exit;
-    //Check if the file is anything but the llowed image types, and if not, stop and redirect.
+    //Check if the file is anything but the allowed image types, and if not, stop and redirect.
 }
 
 $check = getimagesize($_FILES['picture']);
@@ -44,20 +40,17 @@ if($_FILES['picture']['size'] > 500000){
     exit;
 }
 $imageAddress = "../images/" . $imageName;
-
-
+//Add the path to the images folder to the front of the image name. To correctly place it.
 
 if(createAdvert($_POST['adname'],$_POST['addesc'],$_POST['location'],$imageName,$_POST['caption'],$_POST['colour'],$_POST['price'])){
+    //If the createAdvert has no errors
     move_uploaded_file($_FILES['picture']['tmp_name'], $imageAddress);
-}else{
-    echo "bugger.";
+    //Place the picture into the images folder so it can be searched.
 }
 function createAdvert($name,$desc,$loc,$imgaddress,$caption,$colour, $price){
     $dbHandle = setUpHandler();
     $dbHandle->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $sqlQuery = "SELECT count(*) FROM classifieds";
-    echo $sqlQuery . "<br>";
-
     $executer = $dbHandle->prepare($sqlQuery);
     $executer->execute();
     $number = $executer->fetch();
@@ -70,7 +63,6 @@ function createAdvert($name,$desc,$loc,$imgaddress,$caption,$colour, $price){
         $dbHandle = setUpHandler();
         $dbHandle->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $sqlQuery = "INSERT INTO classifieds VALUES ('$number', '$name', '$desc', '$loc', '$imgaddress', '$caption','$date','$colour','$userID', '$price')";
-        echo $sqlQuery . "<br>";
 
         $dbHandle->exec($sqlQuery);
         $dbHandle = null;

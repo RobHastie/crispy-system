@@ -8,23 +8,27 @@
 
 <form action="../Scripts/CreateAdScript.php" method="post" enctype="multipart/form-data" id="Create">
 
-    <p>Please fill in all of the details below.</p>
-    <label><p>Upload a picture for your ad: </p><input type="file" name="picture" id="picture"></label>
-    <label><p>Give your picture a short caption: </p><input type="text" name="caption" id="imgCapt"></label>
-    <label><p>Give your advert a name: </p><input type="text" name="adname" id="adname"></label>
-    <label><p>Describe your phone (255 characters max): </p><textarea name="addesc" form="Create" id="addesc" maxlength="255"></textarea></label>
-    <label><p>Say where you are: </p><input type="text" name="location" id="location"></label>
-    <label><p>What's your asking price: £</p><input type="number" name="price" id="price"></label>
-    <label><p>Pick the colour that best describes your phone: </p><select name="colour">
-        <option value="Red">Red</option>
-        <option value="Blue">Blue</option>
-        <option value="Green">Green</option>
-        <option value="Black">Black</option>
-        <option value="White">White</option>
-    </select></label>
-    <input type="submit" name="submit">
-
-
+    <div>
+        <p id="preface">Please fill in all of the details below:</p>
+        <div class="col-lg-6">
+            <label><p>Upload a picture for your ad: </p><input type="file" name="picture" id="picture"></label>
+            <label><p>Give your picture a short caption: </p><input type="text" name="caption" id="imgCapt"></label>
+            <label><p>Give your advert a name: </p><input type="text" name="adname" id="adname"></label>
+            <label><p>Describe your phone (255 characters max): </p><textarea name="addesc" form="Create" id="addesc" maxlength="255"></textarea></label>
+        </div>
+        <div class="col-lg-6">
+            <label><p>Say where you are: </p><input type="text" name="location" id="location"></label>
+            <label><p>What's your asking price: £</p><input type="number" name="price" id="price"></label>
+            <label><p>Pick the colour that best describes your phone: </p><select name="colour">
+                <option value="Red">Red</option>
+                <option value="Blue">Blue</option>
+                <option value="Green">Green</option>
+                <option value="Black">Black</option>
+                <option value="White">White</option>
+            </select></label>
+            <label><input type="submit" name="submit"></label>
+        </div>
+    </div>
 
 
 </form>

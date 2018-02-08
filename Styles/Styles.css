@@ -49,6 +49,9 @@ body {
     padding: 15px 5px 4px 0px;
 }
 #lga{
+    display:inline-block;
+}
+#loginform{
     display:none;
 }
 #logout{
@@ -70,11 +73,26 @@ body {
 }
 
 #Create label{
+    margin-top:2em;
+    display: block;
+}
+#search label{
+    margin-top:2em;
     display: block;
 }
 label p{
     display:inline-block;
 }
+label input{
+    display: inline-block;
+}
 #addesc{
     vertical-align: text-top;
+}
+#colours{
+    vertical-align: text-bottom;
+}
+#preface{
+    padding-left:1em;
+    font-weight: bold;
 }
