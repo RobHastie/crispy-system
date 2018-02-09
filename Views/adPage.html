@@ -18,3 +18,30 @@
 </head>
 
 <body>
+<form action="../AdSearch.php" method="get" id="search">
+
+    <div id="filters">
+        <p id="preface">Input your search criteria below to find matching ads, or just hit search to look through all of them:</p>
+        <div class="col-lg-6">
+            <label><p>Search by Ad name: </p><input type="text" name="adname" id="adname"></label>
+            <label><p>Maximum Price: £</p><input type="number" name="maxprice" id="maxprice"></label>
+            <label><p>Minimum Price: £</p><input type="number" name="minprice" id="minprice"></label>
+        </div>
+        <div class="col-lg-6" id="right">
+            <label><p>Say where you're looking: </p><input type="text" name="location" id="location"></label>
+            <label><p>Pick the colours that you want to see: <br>(Hold ctrl to select multiple)<br>Defaults to all colours </p><select multiple name="colours[]" id="colours">
+                <option value="Red">Red</option>
+                <option value="Blue">Blue</option>
+                <option value="Green">Green</option>
+                <option value="Black">Black</option>
+                <option value="White">White</option>
+            </select></label>
+            <label><p>Sort by: </p><select name="sort">
+                <option value="None">Default: Ad age</option>
+                <option value="PriceA">Price: Ascending</option>
+                <option value="PriceD">Price: Descending</option>
+                <option value="Name">Name: Alphabetical</option>
+            </select></label>
+            <label><input type="submit" name="submit" value="Search"></label>
+        </div>
+    </div>

@@ -96,3 +96,16 @@ label input{
     padding-left:1em;
     font-weight: bold;
 }
+#filters{
+    background-color: burlywood;
+    margin:2vw auto 2vw auto;
+    border-radius: 7px;
+    width:75%;
+    display:block;
+    position:static;
+    overflow-y:auto;
+    padding:1vw;
+}
+#introtext{
+    margin:1vw;
+}
