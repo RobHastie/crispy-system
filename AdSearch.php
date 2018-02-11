@@ -10,17 +10,10 @@ require_once 'Scripts/ListAds.php';
 session_start();
 sessionInitialize();
 
-require_once 'TopBar.html';
-require_once 'Views/adPage.html';
-loggedinas();
+require_once 'TopBar.phtml';
+require_once 'Views/adPage.phtml';
 
 //Here, we need to get a list of ads to fill the page.
-try {
-//We set up a try-catch to deal with any errors.
-    $list = array();
-    //We set up a list to hold the ads we'll fetch
-    $dbHandle = setUpHandler();
-    $dbHandle->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $sqlQuery = "SELECT adname, addesc, image1address, price FROM classifieds";
     //This sets up the base query, which just grabs every ad.
     $and = 0;
@@ -28,18 +21,23 @@ try {
     $where = " WHERE ";
     //This is the string we add to to construct a WHERE clause
     if($_GET['adname'] != ""){
+        //GET variables are always set, so isset won't work. We test for the default value of the variables
         $name = '%' . $_GET['adname'] . '%';
         //The percent signs are multi-character wildcards
         $where = $where . "adname LIKE '$name'";
         //So any name containing the string will pass the check
         $and = 1;
+        //This lets the system know that something has been added, so any other tests that are added to the
+        //Where clause can have an AND placed before them.
     }
     if($_GET['minprice'] != ""){
         if($and == 1){
             $where = $where . " AND ";
+            //If something has been added to the where clause, these checks put in AND's to fit it all together.
         }
         $min = $_GET['minprice'];
         $where = $where . "price >= '$min'";
+        //Test that price is above the minimum
         $and = 1;
     }
     if($_GET['maxprice'] != ""){
@@ -48,6 +46,7 @@ try {
         }
         $max = $_GET['maxprice'];
         $where = $where . "price <= '$max'";
+        //Test that price is below the maximum
         $and = 1;
     }
     if($_GET['location'] != ""){
@@ -56,14 +55,7 @@ try {
         }
         $loc = $_GET['location'];
         $where = $where . "Location = '$loc'";
-        $and = 1;
-    }
-    if($_GET['maxprice'] != ""){
-        if($and == 1){
-            $where = $where . " AND ";
-        }
-        $max = $_GET['maxprice'];
-        $where = $where . "price <= '$max'";
+        //Match location
         $and = 1;
     }
     if($_GET['colours'] != ""){
@@ -73,25 +65,62 @@ try {
         $colours = $_GET['colours'];
         $clauses = "(";
         $or = 0;
+        //Here we place the OR' for colours in brackets, so they count as one test for the AND's
         foreach($colours as &$colour) {
+            //For each of the colours selected
             if ($or == 1) {
                 $clauses = $clauses . ' OR ';
+                //If a colour has been added here already, put in an OR
             }
             $clauses = $clauses . "colour = '$colour'";
+            //Match the colour
             $or = 1;
         }
         $clauses = $clauses . ")";
+        //Close the bracket
         $and = 1;
         $where = $where . $clauses;
     }
 
     if($and == 1){
         $sqlQuery = $sqlQuery . $where;
+        //If anything was added, we add the WHERE clause onto the query
     }
+    $sort = " ORDER BY ";
+    //prep the sorting string to reduce repetition.
+    switch($_GET['sort']){
+        //Base the sorting off of the input
+        case "AgeD":
+            $sort = $sort . "datecreated ASC";
+            break;
+        case "PriceA":
+            $sort = $sort . "price ASC";
+            break;
+        case "PriceD":
+            $sort = $sort . "price DESC";
+            break;
+        case "Name":
+            $sort = $sort . "adname";
+            break;
+        default:
+            //Age ascending is the default, so we don't need to check for AgeA
+            $sort = $sort . "datecreated DESC";
+            break;
+    }
+    $sqlQuery = $sqlQuery . $sort;
+    //Add the ORDER BY to the query.
     //echo $sqlQuery;
+
+try {
+//We set up a try-catch to deal with any errors.
+    $dbHandle = setUpHandler();
+    $dbHandle->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
     $fetch = $dbHandle->prepare($sqlQuery);
     $fetch->execute();
     $loop = 0;
+    $list = array();
+    //We set up a list to hold the ads we'll fetch
     while($ads = $fetch->fetch()){
         $ad = new AdThumbnail($ads[0],$ads[1],$ads[2],$ads[3]);
         $list[$loop] = $ad;

@@ -8,14 +8,15 @@
 require_once 'Scripts/CommonFunctions.php';
 session_start();
 sessionInitialize();
-require_once 'TopBar.html';
-require_once 'Views/MainPage.html';
+require_once 'TopBar.phtml';
+require_once 'Views/MainPage.phtml';
 
-if($_SESSION['loggedin'] == true){
+/*if($_SESSION['loggedin'] == true){
     loggedinas();
 }else{
+    //Have some javascript
     echo '<script type="text/javascript">',
     'document.getElementById("lga").style.display = "none";',
     'document.getElementById("loginform").style.display = "inline-block";',
     '</script>';
-}
+}*/

@@ -8,8 +8,6 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Adverts</title>
-
     <!-- Bootstrap core CSS -->
     <link href="Styles/bootstrap.min.css" rel="stylesheet">
 	<link href="Styles/Styles.css" rel="stylesheet">
@@ -37,17 +35,23 @@
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li><a href="AdSearch.php">All Ads</a></li>
-            <li><a href="CreateAd.php">New Ad</a></li>
-            <li><a href="WatchedAds.php">My Watchlist</a></li>
+              <?php if($_SESSION['loggedin'] == true) {
+                  echo '<li><a href="CreateAd.php"> New Ad</a ></li >',
+                  '<li><a href="WatchedAds.php"> My Watchlist </a></li>';
+                    }//These only need to be here when logged in. ?>
           </ul>
             <div id="login">
-                <form id="loginform" name="login" action="Scripts/LoginScript.php" method="post">
+                <form id="loginform" name="login" action="Scripts/LoginScript.php" method="post"<?php if($_SESSION['loggedin'] != true){
+                    echo 'style="display:inline-block;"';
+                } ?>>
                     <label><p>Email:</p><input type="text" name="Email"></label>
                     <label><p>Password:</p><Input type="password" name="Password"></label>
                     <label><input type="submit" name="submit" value="Login" id="loginbutton"></label>
                 </form>
-              <div id="lga">
-                <p id="lgat"></p>
+              <div id="lga" <?php if($_SESSION['loggedin'] != true){
+                                    echo 'style="display:none;"';
+              } ?>>
+                  <p id="lgat">Logged in as: <?php echo $_SESSION['Email'] ?></p>
                 <a href="Scripts/LogoutScript.php" id="logout">Logout</a>
               </div>
             </div>
