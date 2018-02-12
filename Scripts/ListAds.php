@@ -11,23 +11,25 @@ class AdThumbnail{
     public $image;
     public $description;
     public $price;
+    public $adid;
 
-    function __construct($name,$desc,$img, $price){
+    function __construct($name,$desc,$img, $price, $adid){
         $this->adName = $name;
         $this->description = $desc;
         $this->image = $img;
         $this->price = $price;
+        $this->adid = $adid;
     }
 
     public function printThumbnail(){
-        echo '<div class="col-md-6 col-lg-4">',
+        echo '<a href="../Advert.php?Advert=' . $this->adid . '"><div class="col-md-6 col-lg-4 SmallAd">',
         '<div class="adSmall">',
           '<div class="imageWrap"><img src="../images/' . $this->image . '"></div>',
             '<h1>' . $this->adName. '</h1>',
             '<p>' . $this->description .'</p>',
             '<p>Price: £' . $this->price . '</p>',
         '</div>',
-        '</div>';
+        '</div></a>';
     }
 }
 function searchWatchedAds(){
@@ -53,7 +55,7 @@ function searchWatchedAds(){
             $fetch2 = $dbHandle2->prepare($sqlQuery);
             $fetch2->execute();
             $adDetails = $fetch2->fetch();
-            $ad = new AdThumbnail($adDetails[0],$adDetails[1],$adDetails[2],$adDetails[3]);
+            $ad = new AdThumbnail($adDetails[0],$adDetails[1],$adDetails[2],$adDetails[3], $ads[0]);
             $list[$loop] = $ad;
             $loop++;
         }

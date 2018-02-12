@@ -13,7 +13,7 @@ sessionInitialize();
 if($_SESSION['loggedin'] != true OR !isset($_SESSION['userid'])){
     header("Location: index.php");
 }
-require_once 'TopBar.phtml';
+require_once 'Views/TopBar.phtml';
 require_once 'Views/CreateAd.phtml';
 
 if($_SESSION['redirect'] == 1){

@@ -10,11 +10,11 @@ require_once 'Scripts/ListAds.php';
 session_start();
 sessionInitialize();
 
-require_once 'TopBar.phtml';
+require_once 'Views/TopBar.phtml';
 require_once 'Views/adPage.phtml';
 
 //Here, we need to get a list of ads to fill the page.
-    $sqlQuery = "SELECT adname, addesc, image1address, price FROM classifieds";
+    $sqlQuery = "SELECT adname, addesc, image1address, price, adID FROM classifieds";
     //This sets up the base query, which just grabs every ad.
     $and = 0;
     //This variable keeps track of if something has been added to the where clause.
@@ -122,7 +122,7 @@ try {
     $list = array();
     //We set up a list to hold the ads we'll fetch
     while($ads = $fetch->fetch()){
-        $ad = new AdThumbnail($ads[0],$ads[1],$ads[2],$ads[3]);
+        $ad = new AdThumbnail($ads[0],$ads[1],$ads[2],$ads[3],$ads[4]);
         $list[$loop] = $ad;
         $loop++;
     }

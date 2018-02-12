@@ -32,7 +32,7 @@ body {
 .adSmall p{
     padding-top:1%;
 }
-.imageWrap{
+.adSmall .imageWrap{
     width: 40%;
     display:inline-block;
 }
@@ -108,4 +108,21 @@ label input{
 }
 #introtext{
     margin:1vw;
+}
+.SmallAd{
+    color:black !important;
+}
+
+.LeftBig .imageWrap{
+
+}
+
+.imgbig{
+    max-width:100%;
+    border-radius: 50%;
+    border:2px solid gray;
+}
+
+.block{
+    display:block;
 }

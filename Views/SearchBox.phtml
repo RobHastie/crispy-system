@@ -1,0 +1,46 @@
+<?php
+function fillInput($getVar){
+    if(isset($_GET[$getVar])){
+        echo 'value="' . $_GET[$getVar] . '"';
+}}
+
+function selected($selected){
+    if($selected == $_GET['sort']){
+        echo "selected";
+    }
+}
+function multiSelected($selected){
+    if(in_array($selected, $_GET['colours'])){
+        echo "selected";
+    }
+}
+?>
+
+
+
+<div id="filters">
+    <p id="preface">Input your search criteria below to find matching ads, or just hit search to look through all of them:</p>
+    <div class="col-lg-6">
+        <label><p>Search by Ad name: </p><input type="text" name="adname" id="adname" <?php fillInput("adname") ?>></label>
+        <label><p>Maximum Price: £</p><input type="number" name="maxprice" id="maxprice" <?php fillInput("maxprice") ?>></label>
+        <label><p>Minimum Price: £</p><input type="number" name="minprice" id="minprice" <?php fillInput("minprice") ?>></label>
+    </div>
+    <div class="col-lg-6" id="right">
+        <label><p>Say where you're looking: </p><input type="text" name="location" id="location" <?php fillInput("location") ?>></label>
+        <label><p>Pick the colours that you want to see: <br>(Hold ctrl to select multiple)<br>Defaults to all colours </p><select multiple name="colours[]" id="colours">
+            <option value="Red" <?php multiSelected("Red"); ?>>Red</option>
+            <option value="Blue" <?php multiSelected("Blue"); ?>>Blue</option>
+            <option value="Green" <?php multiSelected("Green"); ?>>Green</option>
+            <option value="Black" <?php multiSelected("Black"); ?>>Black</option>
+            <option value="White" <?php multiSelected("White"); ?>>White</option>
+        </select></label>
+        <label><p>Sort by: </p><select name="sort">
+            <option value="AgeA" <?php selected("AgeA"); ?>>Age: Newest first</option>
+            <option value="AgeD" <?php selected("AgeD"); ?>>Age: Oldest first</option>
+            <option value="PriceA" <?php selected("PriceA"); ?>>Price: Ascending</option>
+            <option value="PriceD" <?php selected("PriceD"); ?>>Price: Descending</option>
+            <option value="Name" <?php selected("Name"); ?>>Name: Alphabetical</option>
+        </select></label>
+        <label><input type="submit" name="submit" value="Search"></label>
+    </div>
+</div>

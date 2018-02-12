@@ -8,13 +8,16 @@
 require_once 'CommonFunctions.php';
 session_start();
 sessionInitialize();
+if(!isset($_GET['adid']) or !$_SESSION['loggedin'] == true OR !isset($_SESSION['userid'])){
+    header("Location: index.php");
+}
 
 try {
-    $userid = $_SESSION['userID'];
+    $userid = $_SESSION['userid'];
     $adid = $_GET['adid'];
     $dbHandle = setUpHandler();
     $dbHandle->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $sqlQuery = "INSERT INTO Watchlist VALUES ('$userid', '$adid')";
+    $sqlQuery = "INSERT INTO Watchlist VALUES ('$adid', '$userid')";
     echo $sqlQuery . "<br>";
 
     $dbHandle->exec($sqlQuery);

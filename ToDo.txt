@@ -2,11 +2,11 @@ Functionality:
 
 Login: y
 
-Upload ad:
+Upload ad: y
 
-Search ads:
+Search ads: y--
 
-Watch Ads:
+Watch Ads: --
 
 Create Account:
 	Captcha:

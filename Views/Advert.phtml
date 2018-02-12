@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title><?php echo $advert->adName  ?></title>
+</head>
+
+<body>
+
+<h1><?php echo $advert->adName ?></h1>
+<div class="block">
+<div class="col-md-6 LeftBig">
+    <div class="imageWrap"><img src="../images/<?php echo $advert->image ?>" class="imgbig"></div>
+    <p class="imgcapt"><?php echo $advert->caption ?></p>
+</div>
+<div class="col-md-6">
+    <p>Description: <?php echo $advert->description ?></p>
+    <p>Location: <?php echo $advert->location ?></p>
+    <p>Date posted: <?php echo $advert->date ?></p>
+    <p>Colour: <?php echo $advert->colour ?></p>
+    <p>Price: £<?php echo $advert->price ?></p>
+</div>
+</div>
+<?php
+if($_SESSION['loggedin'] == true) {
+    //Some things should only be shwon when logged in
+    echo '<p>Advert Poster Contact Details:</p>',
+        '<p>Email: ' . $advert->posterEmail . '</p>',
+        '<p>Phone number: ' . $advert->posterPhone . '</p>',
+        '<form action="../Scripts/WatchScript.php"> <button type="submit" method="get" name="adid" value="' . $advert->adID . '">Watch Ad</button></form>';
+}else{
+    echo '<p>Log in to view the Seller\'s contact details.</p>';
+}
+?>
+
+

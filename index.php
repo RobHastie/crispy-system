@@ -8,7 +8,7 @@
 require_once 'Scripts/CommonFunctions.php';
 session_start();
 sessionInitialize();
-require_once 'TopBar.phtml';
+require_once 'Views/TopBar.phtml';
 require_once 'Views/MainPage.phtml';
 
 /*if($_SESSION['loggedin'] == true){
