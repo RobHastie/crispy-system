@@ -80,6 +80,10 @@ body {
     margin-top:2em;
     display: block;
 }
+#SignUp label{
+    margin-top:2em;
+    display: block;
+}
 label p{
     display:inline-block;
 }
@@ -125,4 +129,16 @@ label input{
 
 .block{
     display:block;
+}
+
+#SignUp textarea{
+    height: 2em;
+    vertical-align: text-top;
+}
+#captcha p{
+    display:block;
+}
+#captcha input{
+    margin-left: 2em;
+    width: 3em;
 }
