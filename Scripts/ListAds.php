@@ -43,6 +43,7 @@ function searchWatchedAds(){
         $dbHandle = setUpHandler();
         $dbHandle->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $sqlQuery = "SELECT * FROM Watchlist WHERE userID = '$userid'";
+        //User id is not user-supplied, so no parameters are needed.
 
         $fetch = $dbHandle->prepare($sqlQuery);
         $fetch->execute();
@@ -51,6 +52,7 @@ function searchWatchedAds(){
             $dbHandle2 = setUpHandler();
             $dbHandle2->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $sqlQuery = "SELECT adname, addesc, image1address, price FROM classifieds WHERE adID = '$ads[0]'";
+            //For each ad we retrieved before, we get the information we need for it's thumbnail.
 
             $fetch2 = $dbHandle2->prepare($sqlQuery);
             $fetch2->execute();

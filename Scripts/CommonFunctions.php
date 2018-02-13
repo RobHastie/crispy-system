@@ -5,7 +5,7 @@
  * Date: 01/02/18
  * Time: 14:16
  */
-
+//These two functions are called on most pages, so it's good to have them together here to easily require.
 function setUpHandler()
 {
     $host = 'helios.csesalford.com';
@@ -26,10 +26,4 @@ function sessionInitialize(){
     }
     //If the session value loggedin is not set, set it and Admin to false.
     //This helps maintain the things on the site that depend on their values.
-}
-function loggedinas(){
-    echo '<script type="text/javascript">',
-        'document.getElementById("lgat").innerHTML = "Logged in as: '. $_SESSION['Email'] . '";',
-    '</script>';
-    //This simply tells the Javascript to edit an empty <p> tag to say the email of the user logged in.
 }

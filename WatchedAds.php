@@ -15,7 +15,6 @@ if(!$_SESSION['loggedin'] == true OR !isset($_SESSION['userid'])){
 }
 require_once 'Views/TopBar.phtml';
 require_once 'Views/WatchedAds.html';
-loggedinas();
 
 require_once 'Scripts/ListAds.php';
 $list = searchWatchedAds();

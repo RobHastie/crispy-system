@@ -12,41 +12,6 @@ session_start();
 
 //createUser('Password', 'Test3@Gmail.com', '12 Three Road', '01908723', 'Description');
 
-$_SESSION['userid'] = '0000000001';
-
-watchAd('000000000000005');
-echo "testing" . "<br>";
-/*session_unset();
-session_destroy();*/
-
-function createUser($password, $email, $address, $mobile, $desc){
-    $hash = password_hash($password, PASSWORD_DEFAULT);
-    $dbHandle = setUpHandler();
-    $dbHandle->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $sqlQuery = "SELECT count(*) FROM Users";
-    echo $sqlQuery . "<br>";
-
-    $executer = $dbHandle->prepare($sqlQuery);
-    $executer->execute();
-    $number = $executer->fetch();
-    $number = sprintf('%010d', ($number[0] + 1));
-
-    $dbHandle = null;
-    try {
-        $dbHandle = setUpHandler();
-        $dbHandle->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sqlQuery = "INSERT INTO Users (userID, password, useremail, address, mobile, userdesc) VALUES ('$number', '$hash','$email', '$address', '$mobile', '$desc')";
-        echo $sqlQuery . "<br>";
-
-        $dbHandle->exec($sqlQuery);
-        $dbHandle = null;
-        return true;
-
-    }catch(PDOException $e){
-        echo $sqlQuery . "<br>" . $e->getMessage();
-    }
-    //This function inserts a user record into the database
-}
 
 function createAdvert($name,$desc,$loc,$imgaddress,$caption,$colour, $price){
     $dbHandle = setUpHandler();

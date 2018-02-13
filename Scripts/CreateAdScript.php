@@ -15,6 +15,18 @@ if(!isset($_FILES['picture']) or !isset($_POST['caption']) or !isset($_POST['adn
     header("Location: ../CreateAd.php");
     exit;
 }
+$col = $_POST['colour'];
+if($col != "Red" and $col != "Blue" and $col != "Green" and $col != "Black" and $col != "White"){
+    //The variables that are sent towards us have to be checked to make sure they are what they should be.
+    //Someone could easily send other colours, which is meaningless but we don't want it to happen.
+    header("Location: ../CreateAd.php");
+    exit;
+}
+if(!is_numeric($_POST['price'])){
+    //Price has to be a number. So we make sure it is.
+    header("Location: ../CreateAd.php");
+    exit;
+}
 
 $imageName = uniqid();
 
@@ -48,28 +60,42 @@ if(createAdvert($_POST['adname'],$_POST['addesc'],$_POST['location'],$imageName,
     //Place the picture into the images folder so it can be searched.
 }
 function createAdvert($name,$desc,$loc,$imgaddress,$caption,$colour, $price){
-    $dbHandle = setUpHandler();
+    /*$dbHandle = setUpHandler();
     $dbHandle->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $sqlQuery = "SELECT count(*) FROM classifieds";
     $executer = $dbHandle->prepare($sqlQuery);
     $executer->execute();
     $number = $executer->fetch();
     $number = sprintf('%015d', ($number[0] + 1));
+    $dbHandle = null;*/
+    $number = uniqid();
+    //This is a convenient way to make a unique ID, so we might as well use it again.
+
 
     $date = date('Y-m-d');
-    $dbHandle = null;
+    //This function gives us a date stamp. And is formatted to the date format MySQL uses
     $userID = $_SESSION['userid'];
+
+
+
     try {
         $dbHandle = setUpHandler();
+        $dbHandle->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
         $dbHandle->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sqlQuery = "INSERT INTO classifieds VALUES ('$number', '$name', '$desc', '$loc', '$imgaddress', '$caption','$date','$colour','$userID', '$price')";
+        //$sqlQuery = "INSERT INTO classifieds VALUES ('$number', '$name', '$desc', '$loc', '$imgaddress', '$caption','$date','$colour','$userID', '$price')";
+        //Now we just insert the data into the database.
+        $prep = $dbHandle->prepare("INSERT INTO classifieds VALUES ('$number', :name, :desc, :loc, '$imgaddress', :caption,'$date','$colour','$userID', '$price')");
+        $prep->bindParam(':desc', $desc);
+        $prep->bindParam(':name', $name);
+        $prep->bindParam(':loc', $loc);
+        $prep->bindParam(':caption', $caption);
+        $prep->execute();
 
-        $dbHandle->exec($sqlQuery);
         $dbHandle = null;
         return true;
 
     }catch(PDOException $e){
-        echo $sqlQuery . "<br>" . $e->getMessage();
+        echo $e->getMessage();
     }
     //This function inserts a user record into the database
     return false;

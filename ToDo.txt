@@ -4,9 +4,9 @@ Login: y
 
 Upload ad: y
 
-Search ads: y--
+Search ads: y
 
-Watch Ads: --
+Watch Ads: y-
 
 Create Account:
 	Captcha:

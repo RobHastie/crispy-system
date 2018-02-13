@@ -13,17 +13,29 @@ if(!isset($_GET['adid']) or !$_SESSION['loggedin'] == true OR !isset($_SESSION['
 }
 
 try {
+    $dbHandle = setUpHandler();
+    $dbHandle->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+    //This enables parameterisation for the queries
+    $dbHandle->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    //This enables error handling for exceptions.
     $userid = $_SESSION['userid'];
     $adid = $_GET['adid'];
-    $dbHandle = setUpHandler();
-    $dbHandle->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $sqlQuery = "INSERT INTO Watchlist VALUES ('$adid', '$userid')";
-    echo $sqlQuery . "<br>";
 
+    $prep = $dbHandle->prepare("SELECT COUNT(*) FROM classifieds WHERE adID = :adid");
+    $prep->bindParam(':adid', $adid);
+    $prep->execute();
+    $fetch = $prep->fetch();
+    //We run a query here to make sure that the ad ID we got from the user is legitimate.
+    if($fetch[0] != 1){
+        echo "Error.";
+        exit;
+    }
+
+    $sqlQuery = "INSERT INTO Watchlist VALUES ('$adid', '$userid')";
+    //userid is a session variable set by us, so it's safe. ad id is confirmed by this point. So it's safe.
     $dbHandle->exec($sqlQuery);
     $dbHandle = null;
-    return true;
-
+    header("Location: WatchedAds.php");
 }catch(PDOException $e){
     echo $sqlQuery . "<br>" . $e->getMessage();
 }
