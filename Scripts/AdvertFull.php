@@ -24,9 +24,11 @@ class AdvertFull{
         $this->adID = $id;
         //We're getting ad from id, so we can set the variable immediately.
         $dbHandle = setUpHandler();
+        $dbHandle->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
         $dbHandle->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sqlQuery = "SELECT * FROM classifieds WHERE adid = '$id'";
-        $fetch = $dbHandle->prepare($sqlQuery);
+        $fetch = $dbHandle->prepare("SELECT * FROM classifieds WHERE adid = :id");
+        $fetch->bindParam(':id' , $id);
+        //Ad id is taken from theuser end, so we bind it as a parameter to prevent injection.
         $fetch->execute();
         $data = $fetch->fetch();
 
@@ -41,6 +43,7 @@ class AdvertFull{
         //We set a bunch of variables to the data we just fetched
 
         $sqlQuery = "SELECT useremail, mobile FROM Users WHERE userID = '$data[8]'";
+        //This query is entirely things we set up in the php, so it's fine.
         $fetch = $dbHandle->prepare($sqlQuery);
         $fetch->execute();
         $data = $fetch->fetch();

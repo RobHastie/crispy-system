@@ -41,14 +41,15 @@ if(isset($_POST['Email'])){
 
 function validateLogin($email, $password){
     $dbHandler = setUpHandler();
-    $sqlQuery = "SELECT password, userID FROM Users WHERE useremail = '$email'";
-    echo $sqlQuery . "<br>";
-    $data = $dbHandler->prepare($sqlQuery);
+    $data = $dbHandler->prepare("SELECT password, userID FROM Users WHERE useremail = :email");
+    $data->bindParam(':email',$email);
+    //We get user id from the user, so we parameterise it.
     $data->execute();
     $pwhash = $data->fetch();
     if (password_verify($password, $pwhash[0])) {
-        //Check the password versus the stored encrypted password for the chosen email.
+        //Check the password versus the stored hashed password for the chosen email.
         $_SESSION['userid'] = $pwhash[1];
+        //Set the user ID to what we just pulled out for convenient use.
         return true;
     } else {
         return false;
@@ -56,16 +57,13 @@ function validateLogin($email, $password){
 }
 function checkAdmin($email){
     $dbHandler = setUpHandler();
-    $sqlQuery = "SELECT password FROM Users WHERE useremail = '$email'";
-    echo $sqlQuery . "<br>";
-    $data = $dbHandler->prepare($sqlQuery);
+    $data = $dbHandler->prepare("SELECT password FROM Users WHERE useremail = :email");
+    $data->bindParam(':email',$email);
     $data->execute();
     $priv = $data->fetch();
     if($priv[0] == 1){
         //The admin value is stored as a bit, 1 is true, 0 is false
-        echo '<br>', 'Target Email is for an admin', '<br>';
         return true;
     }
-    echo '<br>', 'Target Email is not for an admin', '<br>';
     return false;
 }

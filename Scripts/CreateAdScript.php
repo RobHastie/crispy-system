@@ -28,6 +28,7 @@ if(!is_numeric($_POST['price'])){
     exit;
 }
 
+
 $imageName = uniqid();
 
 $finfo = finfo_open(FILEINFO_MIME);
