@@ -22,11 +22,16 @@
 </div>
 <?php
 if($_SESSION['loggedin'] == true) {
-    //Some things should only be shwon when logged in
+    //Some things should only be shown when logged in
     echo '<p>Advert Poster Contact Details:</p>',
         '<p>Email: ' . $advert->posterEmail . '</p>',
-        '<p>Phone number: ' . $advert->posterPhone . '</p>',
-        '<form action="../Scripts/WatchScript.php"> <button type="submit" method="get" name="adid" value="' . $advert->adID . '">Watch Ad</button></form>';
+        '<p>Phone number: ' . $advert->posterPhone . '</p>';
+
+    if($watched == 0) {
+        echo '<form action="../Scripts/WatchScript.php"> <button type="submit" method="get" name="adid" value="' . $advert->adID . '">Watch Ad</button></form>';
+    }else{
+        echo '<form action="../Scripts/WatchScript.php"> <button type="submit" method="get" name="adid" value="' . $advert->adID . '">Unwatch Ad</button></form>';
+    }
 }else{
     echo '<p>Log in to view the Seller\'s contact details.</p>';
 }

@@ -41,7 +41,6 @@ function searchWatchedAds(){
             return false;
         }
         $dbHandle = setUpHandler();
-        $dbHandle->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $sqlQuery = "SELECT * FROM Watchlist WHERE userID = '$userid'";
         //User id is not user-supplied, so no parameters are needed.
 

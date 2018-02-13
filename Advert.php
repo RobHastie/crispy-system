@@ -13,6 +13,21 @@ if(!isset($_GET['Advert'])){
     header("Location: index.php");
 }
 require_once 'Scripts/AdvertFull.php';
-$advert = new AdvertFull($_GET['Advert']);
+$adid = $_GET['Advert'];
+$advert = new AdvertFull($adid);
+
+$dbHandle = setUpHandler();
+$userid = $_SESSION['userid'];
+
+//This section of code is to check if the logged in user is already wtahcing the ad.
+$prep = $dbHandle->prepare("SELECT COUNT(*) FROM Watchlist WHERE adID = :adid and userID = '$userid'");
+$prep->bindParam(':adid', $adid);
+$prep->execute();
+$fetch = $prep->fetch();
+$watched = 0;
+if($fetch[0] == 1){
+    $watched = 1;
+}
+
 require_once 'Views/TopBar.phtml';
 require_once 'Views/Advert.phtml';

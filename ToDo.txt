@@ -6,7 +6,7 @@ Upload ad: y
 
 Search ads: y
 
-Watch Ads: y-
+Watch Ads: y
 
 Create Account:
 	Captcha:

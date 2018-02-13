@@ -114,9 +114,6 @@ require_once 'Views/adPage.phtml';
 try {
 //We set up a try-catch to deal with any errors.
     $dbHandle = setUpHandler();
-    $dbHandle->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-    $dbHandle->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
     $fetch = $dbHandle->prepare($sqlQuery);
     $params = 1;
     if(isset($name)) {

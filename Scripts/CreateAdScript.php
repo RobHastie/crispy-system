@@ -59,19 +59,11 @@ if(createAdvert($_POST['adname'],$_POST['addesc'],$_POST['location'],$imageName,
     //If the createAdvert has no errors
     move_uploaded_file($_FILES['picture']['tmp_name'], $imageAddress);
     //Place the picture into the images folder so it can be searched.
+    header("Location: ../AdSearch.php");
 }
 function createAdvert($name,$desc,$loc,$imgaddress,$caption,$colour, $price){
-    /*$dbHandle = setUpHandler();
-    $dbHandle->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $sqlQuery = "SELECT count(*) FROM classifieds";
-    $executer = $dbHandle->prepare($sqlQuery);
-    $executer->execute();
-    $number = $executer->fetch();
-    $number = sprintf('%015d', ($number[0] + 1));
-    $dbHandle = null;*/
     $number = uniqid();
     //This is a convenient way to make a unique ID, so we might as well use it again.
-
 
     $date = date('Y-m-d');
     //This function gives us a date stamp. And is formatted to the date format MySQL uses
@@ -81,9 +73,6 @@ function createAdvert($name,$desc,$loc,$imgaddress,$caption,$colour, $price){
 
     try {
         $dbHandle = setUpHandler();
-        $dbHandle->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-        $dbHandle->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        //$sqlQuery = "INSERT INTO classifieds VALUES ('$number', '$name', '$desc', '$loc', '$imgaddress', '$caption','$date','$colour','$userID', '$price')";
         //Now we just insert the data into the database.
         $prep = $dbHandle->prepare("INSERT INTO classifieds VALUES ('$number', :name, :desc, :loc, '$imgaddress', :caption,'$date','$colour','$userID', '$price')");
         $prep->bindParam(':desc', $desc);

@@ -13,6 +13,10 @@ function setUpHandler()
     $user = 'stb216';
     $pass = 'Salford-17';
     $dbHandler = new PDO("mysql:host=$host;dbname=$dbName", $user, $pass);
+    $dbHandler->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+    //This enables parameterisation for the queries
+    $dbHandler->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    //This enables error handling for exceptions.
     return $dbHandler;
     //Set up the PHP Database Object according to the values at the top, then return the PDO
     //This way, the Database Details are only in one place and are easy to change.
