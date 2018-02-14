@@ -18,6 +18,7 @@ class AdvertFull{
     public $adID;
     public $posterEmail;
     public $posterPhone;
+    public $posterID;
     //All of the data an Advert object needs
 
     function __construct($id){
@@ -37,6 +38,7 @@ class AdvertFull{
         $this->caption = $data[5];
         $this->date = $data[6];
         $this->colour = $data[7];
+        $this->posterID = $data[8];
         $this->price = $data[9];
         //We set a bunch of variables to the data we just fetched
 

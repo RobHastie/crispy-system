@@ -37,10 +37,13 @@
             <li><a href="../AdSearch.php">All Ads</a></li>
               <?php if($_SESSION['loggedin'] == true) {
                   echo '<li><a href="../CreateAd.php"> New Ad</a></li>',
-                  '<li><a href="WatchedAds.php"> My Watchlist </a></li>';
+                  '<li><a href="../WatchedAds.php"> My Watchlist </a></li>';
                   //These only need to be here when logged in.
                     }else {
                   echo '<li><a href="../SignUp.php">Sign Up</a></li>';
+                    }
+                    if($_SESSION['Admin']){
+                        echo '<li><a href="../Admin.php"> Admin Options </a></li>';
                     }?>
           </ul>
             <div id="login">

@@ -8,13 +8,13 @@ Search ads: y
 
 Watch Ads: y
 
-Create Account:
-	Captcha:
+Create Account: y
+	Captcha: y
 
-Admin functionality:
+Admin functionality: 
 
-DDOS protection:
+DDOS protection: 
 
-Validation: 
+Validation: y-
 
-Security: 
+Security: y-

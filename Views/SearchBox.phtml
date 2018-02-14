@@ -28,11 +28,11 @@ function multiSelected($selected){
     <div class="col-lg-6" id="right">
         <label><p>Say where you're looking: </p><input type="text" name="location" id="location" <?php fillInput("location") ?>></label>
         <label><p>Pick the colours that you want to see: <br>(Hold ctrl to select multiple)<br>Defaults to all colours </p><select multiple name="colours[]" id="colours">
+            <option value="Black" <?php multiSelected("Black"); ?>>Black</option>
+            <option value="White" <?php multiSelected("White"); ?>>White</option>
             <option value="Red" <?php multiSelected("Red"); ?>>Red</option>
             <option value="Blue" <?php multiSelected("Blue"); ?>>Blue</option>
             <option value="Green" <?php multiSelected("Green"); ?>>Green</option>
-            <option value="Black" <?php multiSelected("Black"); ?>>Black</option>
-            <option value="White" <?php multiSelected("White"); ?>>White</option>
         </select></label>
         <label><p>Sort by: </p><select name="sort">
             <option value="AgeA" <?php selected("AgeA"); ?>>Age: Newest first</option>

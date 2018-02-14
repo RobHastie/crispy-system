@@ -142,3 +142,7 @@ label input{
     margin-left: 2em;
     width: 3em;
 }
+
+.bold{
+    font-weight: bold;
+}

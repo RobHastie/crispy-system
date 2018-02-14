@@ -12,24 +12,20 @@ if(isset($_POST['Email'])){
     $email = $_POST['Email'];
     //Check if email was set. Then put it in a simpler variable.
     echo $email . '<br>';
-    if(isset($_POST['Password'])){
+    if(isset($_POST['Password'])) {
         $password = $_POST['Password'];
         //Check if password was set.
-        if(validateLogin($email, $password)){
+        if (validateLogin($email, $password)) {
             //Check if the email is in the database, and that the password matches.
             echo 'Success';
             $_SESSION['loggedin'] = true;
             $_SESSION['Email'] = $email;
             //Set the session variables so the site knows who is logged in.
-            if(checkAdmin($email)){
-                $_SESSION['Admin'] = true;
-            }else{
-                $_SESSION['Admin'] = false;
-            }
+            $_SESSION['Admin'] = checkAdmin($email);
             //If they are an admin, set that too.
             header("Location: ../index.php");
             //Redirect back to the main page.
-        }else{
+        } else {
             echo 'Invalid Login';
         }
     }else{
@@ -57,7 +53,7 @@ function validateLogin($email, $password){
 }
 function checkAdmin($email){
     $dbHandler = setUpHandler();
-    $data = $dbHandler->prepare("SELECT password FROM Users WHERE useremail = :email");
+    $data = $dbHandler->prepare("SELECT Admin FROM Users WHERE useremail = :email");
     $data->bindParam(':email',$email);
     $data->execute();
     $priv = $data->fetch();

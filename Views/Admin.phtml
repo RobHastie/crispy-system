@@ -1,0 +1,24 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: stb216
+ * Date: 14/02/18
+ * Time: 12:31
+ */
+?>
+<div id="filters">
+    <div class="col-md-6">
+        <form id="uplift" method="post" action="../Scripts/NewAdmin.php">
+            <p class="bold">Set new Admin: </p>
+            <label><input type="text" name="email" id="email"></label>
+            <input type="submit" name="uplift" value="Make Admin">
+        </form>
+    </div>
+    <div class="col-md-6">
+        <form id="limit" method="post" action="#">
+            <p class="bold">Set the time it takes for adverts to expire, in days: </p>
+            <label><input type="number" name="expire" id="expire"></label>
+            <input type="submit" name="expire" value="Set Expiry Time">
+        </form>
+    </div>
+</div>
