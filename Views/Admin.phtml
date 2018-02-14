@@ -15,10 +15,11 @@
         </form>
     </div>
     <div class="col-md-6">
-        <form id="limit" method="post" action="#">
+        <form id="limit" method="post" action="../Scripts/SetAdExpire.php">
             <p class="bold">Set the time it takes for adverts to expire, in days: </p>
             <label><input type="number" name="expire" id="expire"></label>
-            <input type="submit" name="expire" value="Set Expiry Time">
+            <input type="submit" name="expiry" value="Set Expiry Time">
         </form>
+        <a href="../Scripts/ExpireAdvert.php"><button type="button">Expire old adverts.</button></a>
     </div>
 </div>
