@@ -10,6 +10,16 @@ require_once 'Scripts/ListAds.php';
 session_start();
 sessionInitialize();
 
+$AdsPerPage = 1;
+//An easily changeable variable for the amount of ads on each page of ads
+
+    if(!isset($_GET['page']) or $_GET['page'] == ""){
+        $page = 1;
+    }else{
+        $page = $_GET['page'];
+    }
+
+
 require_once 'Views/TopBar.phtml';
 require_once 'Views/adPage.phtml';
 
@@ -136,10 +146,11 @@ try {
         $fetch->bindParam($params, $loc);
         $params++;
     }
+    if(isset($colours)){
     foreach($colours as &$colour) {
         $fetch->bindParam($params, $colour);
         $params++;
-    }
+    }}
     //named parameters don't work with colour, so they all need to be positional parameters.
     $fetch->execute();
     $loop = 0;
@@ -150,8 +161,20 @@ try {
         $list[$loop] = $ad;
         $loop++;
     }
-    foreach ($list as &$ad){
-        $ad->printThumbnail();
+    echo '<div class="adList">';
+    //Put a wrapper around the ads.
+    $capped = 0;
+    for($x = ($page-1)*$AdsPerPage; $x <= $page*$AdsPerPage-1; $x++){
+            $list[$x]->printThumbnail();
+
+        if(count($list) == $x+1){
+            $capped = 1;
+            break;
+        }
+    }
+    echo '</div>';
+    if(count($list) >= $AdsPerPage){
+        require_once 'Views/PageTurn.phtml';
     }
 }catch(PDOException $e){
     echo $sqlQuery . "<br>" . $e->getMessage();

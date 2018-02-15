@@ -1,0 +1,14 @@
+<?php
+    if(!isset($_GET['page'])){
+        $page = 1;
+    }else{
+        $page = $_GET['page'];
+    }
+?>
+<div id="pages">
+    <button form="search" type="submit" name="page"<?php echo 'value="'. ($page-1) . '"' ?>
+    <?php if($page == 1){echo 'style="display:none"';} ?>><?php echo ($page-1) ?></button>
+    <button><?php echo $page ?></button>
+    <button form="search" type="submit" name="page"<?php echo 'value="'. ($page+1) . '"' ?>
+        <?php if($capped == 1){echo 'style="display:none"';} ?>><?php echo ($page+1) ?></button>
+</div>

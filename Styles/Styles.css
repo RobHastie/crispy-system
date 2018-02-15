@@ -146,3 +146,15 @@ label input{
 .bold{
     font-weight: bold;
 }
+
+.adList{
+    display:block;
+}
+
+#pages{
+    margin:auto;
+    display:block;
+    clear:left;
+    width:15vw;
+    min-width:150px;
+}
