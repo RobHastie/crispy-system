@@ -13,13 +13,13 @@ $_SESSION['Captcha'] = $captcha;
 <div id="filters">
     <p id="preface">Fill in all of the details and solve the equation to register:</p>
     <div class="col-lg-6">
-        <label><p>Email: </p><input type="text" name="email" id="email"></label>
+        <label><p>Email: </p><input type="text" name="email" id="email" maxlength="40"></label>
         <label><p>Password: </p><input type="password" name="password" id="password" ></label>
         <!--<label><p>Confirm Password: </p><input type="password" name="confirmPassword" id="confirmPassword" ></label> -->
         <label id="captcha"><p>Solve this equation to prove you're not a robot:</p><img src="../images/<?php echo 5-$captcha //5-captcha means the image name isn't the answer?>.png"><input type="number" name="captcha"></label>
     </div>
     <div class="col-lg-6" id="right">
-        <label><p>Your phone number: </p><input type="text" name="phone" id="phone"></label>
+        <label><p>Your phone number: </p><input type="text" name="phone" id="phone" maxlength="20"></label>
         <label><p>Your Address: </p><textarea name="address" form="SignUp" id="address" maxlength="50"></textarea></label>
         <label><p>Describe yourself: </p><textarea name="userdesc" form="SignUp" id="userdesc" maxlength="255"></textarea></label>
 

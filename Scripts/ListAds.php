@@ -25,14 +25,14 @@ class AdThumbnail{
     public function printThumbnail(){
         //Each AdThumbnail prints it's own html code. That shows some of it's details and
         //Has a link to the page which can display the full advert.
-        echo '<a href="../Advert.php?Advert=' . $this->adid . '"><div class="col-md-6 col-lg-4 SmallAd">',
+        echo '<div class="col-md-6 col-lg-4 linkbox"><a href="../Advert.php?Advert=' . $this->adid . '"><div class="SmallAd">',
         '<div class="adSmall">',
           '<div class="imageWrap"><img src="../images/' . $this->image . '"></div>',
             '<h1>' . $this->adName. '</h1>',
             '<p>' . $this->description .'</p>',
             '<p>Price: £' . $this->price . '</p>',
         '</div>',
-        '</div></a>';
+        '</div></a></div>';
     }
 }
 function searchWatchedAds(){

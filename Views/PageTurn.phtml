@@ -2,7 +2,7 @@
     <button form="search" type="submit" name="page"<?php echo 'value="'. ($page-1) . '"' ?>
     <?php if($page == 1){echo 'style="display:none"';} ?>><?php echo ($page-1)
         //There is no page 0, so we don't want it to show up.?></button>
-    <button><?php echo $page
+    <button class="here"><?php echo $page
         //This one just shows what page the user is on. It's only a button for consistent styling?></button>
     <button form="search" type="submit" name="page"<?php echo 'value="'. ($page+1) . '"' ?>
         <?php if($capped == 1){echo 'style="display:none"';}

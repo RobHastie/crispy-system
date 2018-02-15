@@ -18,8 +18,6 @@
     <p>Date posted: <?php echo $advert->date ?></p>
     <p>Colour: <?php echo $advert->colour ?></p>
     <p>Price: £<?php echo $advert->price ?></p>
-</div>
-</div>
 <?php
 if($_SESSION['loggedin'] == true) {
     //Some things should only be shown when logged in
@@ -39,5 +37,7 @@ if($_SESSION['loggedin'] == true) {
     echo '<p>Log in to view the Seller\'s contact details.</p>';
 }
 ?>
+</div>
+</div>
 
 
