@@ -9,13 +9,15 @@ require_once 'CommonFunctions.php';
 session_start();
 sessionInitialize();
 if(!isset($_GET['adid']) or !$_SESSION['loggedin'] == true OR !isset($_SESSION['userid'])){
+//If there isn't an ad, or the user isn not logged in, leave before doing anything.
     header("Location: index.php");
+    exit;
 }
 $adid = $_GET['adid'];
 $userid = $_SESSION['userid'];
 
 $dbHandle = setUpHandler();
-//This section of code is to check if the logged in user is already wtahcing the ad.
+//This section of code is to check if the logged in user is already watching the ad.
 $prep = $dbHandle->prepare("SELECT COUNT(*) FROM Watchlist WHERE adID = :adid and userID = '$userid'");
 $prep->bindParam(':adid', $adid);
 $prep->execute();

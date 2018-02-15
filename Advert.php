@@ -11,6 +11,8 @@ sessionInitialize();
 
 if(!isset($_GET['Advert'])){
     header("Location: index.php");
+    exit;
+    //We exit after redirects to prevent any extra code executing
 }
 require_once 'Scripts/AdvertFull.php';
 $adid = $_GET['Advert'];

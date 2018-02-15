@@ -14,6 +14,7 @@ class AdThumbnail{
     public $adid;
 
     function __construct($name,$desc,$img, $price, $adid){
+        //The constructor fills the objects variables
         $this->adName = $name;
         $this->description = $desc;
         $this->image = $img;
@@ -22,6 +23,8 @@ class AdThumbnail{
     }
 
     public function printThumbnail(){
+        //Each AdThumbnail prints it's own html code. That shows some of it's details and
+        //Has a link to the page which can display the full advert.
         echo '<a href="../Advert.php?Advert=' . $this->adid . '"><div class="col-md-6 col-lg-4 SmallAd">',
         '<div class="adSmall">',
           '<div class="imageWrap"><img src="../images/' . $this->image . '"></div>',
@@ -57,7 +60,9 @@ function searchWatchedAds(){
             $fetch2->execute();
             $adDetails = $fetch2->fetch();
             $ad = new AdThumbnail($adDetails[0],$adDetails[1],$adDetails[2],$adDetails[3], $ads[0]);
+            //Load the data into small objects to be conveniently returned.
             $list[$loop] = $ad;
+            //Load the objects into an array to easily return and be looped through.
             $loop++;
         }
         return $list;

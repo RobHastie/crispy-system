@@ -79,6 +79,8 @@ function createAdvert($name,$desc,$loc,$imgaddress,$caption,$colour, $price){
         $prep->bindParam(':name', $name);
         $prep->bindParam(':loc', $loc);
         $prep->bindParam(':caption', $caption);
+        //We bind all of the parameters we bring in, just to be sure.
+        //Price is not a parameter like this, since we've confirmed it's just a number
         $prep->execute();
 
         $dbHandle = null;

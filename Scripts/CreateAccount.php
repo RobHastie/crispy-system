@@ -29,7 +29,7 @@ try {
     $number = uniqid();
     //Generate a unique id number
     $hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
-    //Here we geneate a hashkey for the password.
+    //Here we generate a hashkey for the password.
     //So even we don't know what the actual password is.
 
     $dbHandle = setUpHandler();
@@ -46,6 +46,7 @@ try {
     $_SESSION['loggedin'] = true;
     $_SESSION['Email'] = $_POST['email'];
     $_SESSION['userid'] = $number;
+    //Here we set the variables to automatically log in to the newly created account.
     header("Location: ../index.php");
 
 }catch(PDOException $e){

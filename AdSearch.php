@@ -10,14 +10,16 @@ require_once 'Scripts/ListAds.php';
 session_start();
 sessionInitialize();
 
-$AdsPerPage = 1;
+$AdsPerPage = 6;
 //An easily changeable variable for the amount of ads on each page of ads
 
-    if(!isset($_GET['page']) or $_GET['page'] == ""){
-        $page = 1;
-    }else{
-        $page = $_GET['page'];
-    }
+if(!isset($_GET['page']) or $_GET['page'] == ""){
+    //If page is unset in any way, we must be on page 1
+    $page = 1;
+}else{
+    $page = $_GET['page'];
+    //This is the page we are now on.
+}
 
 
 require_once 'Views/TopBar.phtml';
@@ -158,24 +160,31 @@ try {
     //We set up a list to hold the ads we'll fetch
     while($ads = $fetch->fetch()){
         $ad = new AdThumbnail($ads[0],$ads[1],$ads[2],$ads[3],$ads[4]);
+        //Construct a new ad with the detailswe have here
         $list[$loop] = $ad;
+        //Add them to the list array
         $loop++;
     }
     echo '<div class="adList">';
     //Put a wrapper around the ads.
     $capped = 0;
     for($x = ($page-1)*$AdsPerPage; $x <= $page*$AdsPerPage-1; $x++){
+        //Starting from 0, $AdsPerPage, 2*$AdsPerPage, etc
+        //Going to $AdsPerPage-1, 2*$AdsPerPage-1, etc
             $list[$x]->printThumbnail();
 
         if(count($list) == $x+1){
+            //If the last entry in the array was reached, stop the loop.
             $capped = 1;
             break;
         }
     }
     echo '</div>';
     if(count($list) >= $AdsPerPage){
+        //If there are more ads in the list array than fit on the page
+        //We require in the buttons to change the page.
         require_once 'Views/PageTurn.phtml';
     }
 }catch(PDOException $e){
-    echo $sqlQuery . "<br>" . $e->getMessage();
+    echo "<br>" . $e->getMessage();
 }

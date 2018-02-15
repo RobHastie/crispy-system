@@ -44,11 +44,13 @@
                     }
                     if($_SESSION['Admin']){
                         echo '<li><a href="../Admin.php"> Admin Options </a></li>';
+                        //Only admins need admin options
                     }?>
           </ul>
             <div id="login">
                 <form id="loginform" name="login" action="../Scripts/LoginScript.php" method="post"<?php if($_SESSION['loggedin'] != true){
                     echo 'style="display:inline-block;"';
+                    //If the user is not logged in, display this part.
                 } ?>>
                     <label><p>Email:</p><input type="text" name="Email"></label>
                     <label><p>Password:</p><Input type="password" name="Password"></label>
@@ -56,6 +58,7 @@
                 </form>
               <div id="lga" <?php if($_SESSION['loggedin'] != true){
                                     echo 'style="display:none;"';
+                                    //If the user is not logged in, don't display this part.
               } ?>>
                   <p id="lgat">Logged in as: <?php echo $_SESSION['Email'] ?></p>
                 <a href="../Scripts/LogoutScript.php" id="logout">Logout</a>

@@ -23,6 +23,8 @@ if(isset($_POST['Email'])){
             //Set the session variables so the site knows who is logged in.
             $_SESSION['Admin'] = checkAdmin($email);
             //If they are an admin, set that too.
+            //The function returns true or false, so we simply make the GET value
+            //Equal to the function.
             header("Location: ../index.php");
             //Redirect back to the main page.
         } else {

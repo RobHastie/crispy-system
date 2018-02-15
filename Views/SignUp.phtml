@@ -7,7 +7,7 @@
  */
 $captcha = rand(1,4);
 $_SESSION['Captcha'] = $captcha;
-
+//We set up the captcha number that serves as the answer to the captcha, and store it so the next page can use it.
 ?>
 <form action="../Scripts/CreateAccount.php" method="post" id="SignUp">
 <div id="filters">
@@ -16,7 +16,7 @@ $_SESSION['Captcha'] = $captcha;
         <label><p>Email: </p><input type="text" name="email" id="email"></label>
         <label><p>Password: </p><input type="password" name="password" id="password" ></label>
         <!--<label><p>Confirm Password: </p><input type="password" name="confirmPassword" id="confirmPassword" ></label> -->
-        <label id="captcha"><p>Solve this equation to prove you're not a robot:</p><img src="../images/<?php echo 5-$captcha ?>.png"><input type="number" name="captcha"></label>
+        <label id="captcha"><p>Solve this equation to prove you're not a robot:</p><img src="../images/<?php echo 5-$captcha //5-captcha means the image name isn't the answer?>.png"><input type="number" name="captcha"></label>
     </div>
     <div class="col-lg-6" id="right">
         <label><p>Your phone number: </p><input type="text" name="phone" id="phone"></label>

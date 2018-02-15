@@ -28,10 +28,13 @@ if($_SESSION['loggedin'] == true) {
         '<p>Phone number: ' . $advert->posterPhone . '</p>';
 
     if($watched == 0) {
+        //If the variables that shows the ad is watched by the current user is 0:
+        //The button is to watch
         echo '<form action="../Scripts/WatchScript.php"> <button type="submit" method="get" name="adid" value="' . $advert->adID . '">Watch Ad</button></form>';
     }else{
+        //Otherwise the button is to unwatch.
         echo '<form action="../Scripts/WatchScript.php"> <button type="submit" method="get" name="adid" value="' . $advert->adID . '">Unwatch Ad</button></form>';
-    }
+    }//This is just for visuals. Actual changes between watch and unwatch are handled elsewhere
 }else{
     echo '<p>Log in to view the Seller\'s contact details.</p>';
 }

@@ -8,6 +8,12 @@
 require_once 'CommonFunctions.php';
 session_start();
 sessionInitialize();
+
+if($_SESSION['Admin'] != true){
+//This is an admin function, so we need to be sure it is an admin that is using it.
+    exit;
+}
+
 try {
     $dbHandle = setUpHandler();
     $prep = $dbHandle->prepare("UPDATE Users SET Admin = 1 WHERE useremail = :email");

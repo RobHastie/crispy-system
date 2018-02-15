@@ -11,11 +11,15 @@ session_start();
 sessionInitialize();
 
 if($_SESSION['loggedin'] != true OR !isset($_SESSION['userid'])){
+    //User has to be logged in correctly to create an ad, if not, redirect them.
     header("Location: index.php");
+    exit;
+    //We exit after redirects to prevent any extra code executing
 }
 require_once 'Views/TopBar.phtml';
 require_once 'Views/CreateAd.phtml';
 
+//These give information on possible innocent errors.
 if($_SESSION['redirect'] == 1){
     $_SESSION['redirect'] = 0;
     echo '<script type="text/javascript">',

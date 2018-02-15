@@ -1,16 +1,24 @@
 <?php
+//These functions take the GET inputs from the url, and use them to refill
+//The corresponding form inputs. This one is called in each text/number input
+//o supply a value, but only if the GET value is set.
 function fillInput($getVar){
     if(isset($_GET[$getVar])){
         echo 'value="' . $_GET[$getVar] . '"';
-}}
-
+    }
+}
+//These two are used for specific parts which require slightly different approaches
 function selected($selected){
     if($selected == $_GET['sort']){
+        //Only one of sort values can be selected, and get['sort'] is one value
+        //So this compares that to find out if any sort was set.
         echo "selected";
     }
 }
 function multiSelected($selected){
     if(in_array($selected, $_GET['colours'])){
+        //Colours are stored in an array, so we need to check if the input value
+        //Is in the array.
         echo "selected";
     }
 }

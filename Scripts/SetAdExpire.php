@@ -15,6 +15,8 @@ if($_SESSION['Admin'] != true or !isset($_POST['expire'])){
 $dbHandle = setUpHandler();
 
 $prep = $dbHandle->prepare("UPDATE expire SET AdvertDuration = :dur");
+//The expiry time as the only value in a table for easy updating.
+//So we can just edit every row in that table. No WHERE needed.
 $prep->bindValue(':dur', $_POST['expire']);
 $prep->execute();
 

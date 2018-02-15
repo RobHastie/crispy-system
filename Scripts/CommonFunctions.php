@@ -30,4 +30,5 @@ function sessionInitialize(){
     }
     //If the session value loggedin is not set, set it and Admin to false.
     //This helps maintain the things on the site that depend on their values.
+    //And to be certain no errors arise, though none should.
 }
