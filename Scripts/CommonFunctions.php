@@ -14,7 +14,7 @@ function setUpHandler()
     $pass = 'Salford-17';
     $dbHandler = new PDO("mysql:host=$host;dbname=$dbName", $user, $pass);
     $dbHandler->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-    //This enables parameterisation for the queries
+    //This causes the system to use true prepared statements rather than emulated ones
     $dbHandler->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     //This enables error handling for exceptions.
     return $dbHandler;

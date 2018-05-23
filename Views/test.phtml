@@ -1,0 +1,55 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: rober
+ * Date: 23/05/2018
+ * Time: 11:05 PM
+ */
+?>
+<h1 id="test"></h1>
+<button onclick="fetchStuff()">Fetch</button>
+<script>
+    //var formString = 'Scripts/InfiniteScroll.php?scroll=1';
+    //var scrollCount = 0;
+    //var formString = 'Scripts/InfiniteScroll.php?scroll=' + scrollCount + '&' + 'test=0';
+    //var formString = 'Scripts/InfiniteScroll.php?adname=a&maxprice=10000000&minprice=1&location=Manchester&colours%5B%5D=White&sort=AgeA&submit=Search';
+    //var formString = 'Scripts/InfiniteScroll.php?adname=&maxprice=&minprice=&location=&sort=AgeA&submit=Search';
+    var formString = 'Scripts/InfiniteScroll.php?adname=&maxprice=&minprice=&location=&sort=AgeA&submit=Search&scroll=1';
+   /*fetch(formString, {method:'GET'})
+   .then(resp => resp.json())
+   .then(function(resp) {
+    var test = resp.fname;
+    console.log(test);
+    //console.log(resp.fname);
+    resp.forEach(function(ad){
+        document.getElementById("test").innerHTML += ad.adName;
+        document.getElementById("test").innerHTML += "</br>";})
+   })*/
+   function fetchStuff(){
+        fetch(formString)
+            .then(function (resp) {
+                return resp.json();
+            })
+            .then(function (resp) {
+                resp.forEach(function (ad) {
+                    printAd(ad);
+                })
+            })
+    }
+
+    function printAd(ad){
+        //var adList = document.getElementById('test').innerHTML;
+        document.getElementById('test').innerHTML += '<div class="col-md-6 col-lg-4 linkbox"><a href="../Advert.php?Advert=' + ad.adid + '"><div class="SmallAd">';
+        document.getElementById('test').innerHTML += '<div class="adSmall">';
+        document.getElementById('test').innerHTML += '<div class="imageWrap"><img src="../images/' + ad.image + '"></div>';
+        document.getElementById('test').innerHTML += '<h1>' + ad.adName + '</h1>';
+        document.getElementById('test').innerHTML += '<p>' + ad.description +'</p>';
+        document.getElementById('test').innerHTML += '<p>Price: £' + ad.price + '</p>';
+        document.getElementById('test').innerHTML += '</div>';
+        document.getElementById('test').innerHTML += '</div></a></div>';
+
+    }
+</script>
+<div id="adList">
+
+</div>

@@ -157,6 +157,9 @@ label input{
 .adList{
     display:block;
 }
+#adList{
+    display:block;
+}
 
 #pages{
     margin:auto;

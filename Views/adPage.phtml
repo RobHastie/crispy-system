@@ -12,3 +12,56 @@
     include 'SearchBox.phtml';
 //We put the form for searching in a few pages, so let's write it once and include it.
 ?>
+
+    <script>
+        /*document.addEventListener('scroll', function (event) {
+            if (document.body.scrollHeight == document.body.scrollTop + window.innerHeight) {
+                alert("Bottom!");
+            }
+        });*/
+        var scrollCount = 1;
+        document.onscroll = function() {
+            if(document.documentElement.scrollTop + window.innerHeight == document.documentElement.scrollHeight){
+                //This checks if, when the page is scrolled, it has scrolled to the bottom.
+
+                var formString = 'Scripts/InfiniteScroll.php?';
+                if(document.location.toString().indexOf('?') !== -1) {
+                    var query = document.location.toString().split('?');
+                    //This sets query[1] to the get variables, so we can send them to ajax.
+                    formString += query[1];
+                }
+                formString += '&scroll=' + scrollCount;
+
+                    fetch(formString)
+                        .then(function(resp){
+                            return resp.json();
+                        })
+                        .then(function(resp) {
+                            resp.forEach(function(ad){
+                                printAd(ad);
+                            })
+                            scrollCount++;
+                        })
+
+
+
+            }
+        }
+        function printAd(ad){
+            /*var adList;
+            adList = '<div class="col-md-6 col-lg-4 linkbox"><a href="../Advert.php?Advert=' + ad.adid + '"><div class="SmallAd">';
+            adList += '<div class="adSmall">';
+            adList += '<div class="imageWrap"><img src="../images/' + ad.image + '"></div>';
+            adList += '<h1>' + ad.adName + '</h1>';
+            adList += '<p>' + ad.description +'</p>';
+            adList += '<p>Price: £' + ad.price + '</p>';
+            adList += '</div>';
+            adList += '</div></a></div>';
+
+            document.getElementById('adList').innerHTML += adList;*/
+
+            document.getElementById('adList').innerHTML += '<div class="col-md-6 col-lg-4 linkbox"><a href="../Advert.php?Advert=' + ad.adid + '"><div class="SmallAd">' +
+                '<div class="adSmall"><div class="imageWrap"><img src="../images/' + ad.image + '"></div><h1>' + ad.adName + '</h1>' +
+                '<p>' + ad.description +'</p><p>Price: £' + ad.price + '</p></div></div></a></div>';
+        }
+    </script>
