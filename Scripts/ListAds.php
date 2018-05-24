@@ -27,7 +27,7 @@ class AdThumbnail{
         //Has a link to the page which can display the full advert.
         echo '<div class="col-md-6 col-lg-4 linkbox"><a href="../Advert.php?Advert=' . $this->adid . '"><div class="SmallAd">',
         '<div class="adSmall">',
-          '<div class="imageWrap"><img src="../images/' . $this->image . '"></div>',
+          '<div class="imageWrap"><img src="../images/' . $this->image . '" onerror="this.onerror=null;this.src=\'../images/default.png\'"></div>',
             '<h1>' . $this->adName. '</h1>',
             '<p>' . $this->description .'</p>',
             '<p>Price: £' . $this->price . '</p>',

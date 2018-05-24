@@ -61,7 +61,8 @@
             document.getElementById('adList').innerHTML += adList;*/
 
             document.getElementById('adList').innerHTML += '<div class="col-md-6 col-lg-4 linkbox"><a href="../Advert.php?Advert=' + ad.adid + '"><div class="SmallAd">' +
-                '<div class="adSmall"><div class="imageWrap"><img src="../images/' + ad.image + '"></div><h1>' + ad.adName + '</h1>' +
+                '<div class="adSmall"><div class="imageWrap"><img src="../images/' + ad.image + '" onerror="this.onerror=null;this.src=\'../images/default.png\'"></div><h1>' + ad.adName + '</h1>' +
                 '<p>' + ad.description +'</p><p>Price: £' + ad.price + '</p></div></div></a></div>';
         }
     </script>
+
