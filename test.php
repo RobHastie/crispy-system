@@ -8,7 +8,7 @@
 
 require_once 'Scripts/CommonFunctions.php';
 
-$names = array('Mitsubishi', 'Bentley', 'Aston Martin', 'Vauxhall', 'Rolls Royce', 'Mclaren');
+$names = array('Mercedez Benz', 'Alfa Romeo', 'Maserati', 'Mazda');
 $colour = array('red', 'green', 'blue', 'white', 'black');
 $locations = array('Manchester', 'London', 'Leeds');
 $user = array('5a85e99fd68cf', '5a85e9db58835', '5a85ea196456a', '5a85ea9050b34', '5ab501b173bfc');

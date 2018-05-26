@@ -25,27 +25,47 @@ function multiSelected($selected){
 ?>
 
 <script>
-    function liveSearch(){
-        var search = document.getElementById("adname").value;
-        var formString = "../Scripts/LiveSearch.php?search=" + search;
+    function liveSearch(str){
+        var formString = "../Scripts/LiveSearch.php?search=" + str;
+        hideLS();
+
+        if (str.length==0) {
+            document.getElementById("liveSearch").innerHTML="";
+            document.getElementById("liveSearch").style.border="0px";
+            document.getElementById("liveSearch").style.opacity="0";
+            //document.getElementById("liveSearch").style.width = document.getElementById("adname").style.width;
+            return;
+        }
+
         fetch(formString)
             .then(function (resp) {
-                console.log(resp);
                 return resp.json();
             })
     .then(function (resp) {
-
+        document.getElementById("liveSearch").style.border="1px solid #A5ACB2";
+        document.getElementById("liveSearch").style.opacity="100";
+        resp.forEach(function(name){
+            document.getElementById("liveSearch").innerHTML += '<p onclick="clicked(this.innerHTML)">' + name + '</p></br>';
+        })
     })
 }
 
+function clicked(str){
+        document.getElementById("adname").value = str;
+        hideLS();
+}
+function hideLS(){
+    document.getElementById("liveSearch").innerHTML="";
+    document.getElementById("liveSearch").style.border="0px";
+    document.getElementById("liveSearch").style.opacity="0";
+}
 </script>
 
 <div id="filters">
     <p id="preface">Input your search criteria below to find matching ads, or just hit search to look through all of them:</p>
     <div class="col-lg-6">
-        <div id="liveSearch">
-        <label><p>Search by Ad name: </p><input type="text" name="adname" id="adname" <?php fillInput("adname") ?> oninput="liveSearch()"></label>
-        </div>
+        <label><p>Search by Ad name: <div id="ls2"></p><input type="text" name="adname" id="adname" <?php fillInput("adname") ?> oninput="liveSearch(this.value)" autocomplete="off"></label>
+        <div id="liveSearch"></div></div>
         <label><p>Maximum Price: £</p><input type="number" name="maxprice" id="maxprice" <?php fillInput("maxprice") ?>></label>
         <label><p>Minimum Price: £</p><input type="number" name="minprice" id="minprice" <?php fillInput("minprice") ?>></label>
     </div>
