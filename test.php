@@ -8,7 +8,7 @@
 
 require_once 'Scripts/CommonFunctions.php';
 
-$names = array('Mercedes', 'BMW', 'Audi', 'Volkswagen', 'Porsche', 'Honda');
+$names = array('Mitsubishi', 'Bentley', 'Aston Martin', 'Vauxhall', 'Rolls Royce', 'Mclaren');
 $colour = array('red', 'green', 'blue', 'white', 'black');
 $locations = array('Manchester', 'London', 'Leeds');
 $user = array('5a85e99fd68cf', '5a85e9db58835', '5a85ea196456a', '5a85ea9050b34', '5ab501b173bfc');
@@ -18,15 +18,15 @@ $descript = 'Description: Lorem ipsum dolor sit amet, consectetur adipiscing eli
 
 $imgadd = 'placehold';
 
-for($x = 0; $x < 200; $x++){
+for($x = 0; $x < 20; $x++){
     $nam = $names[array_rand($names)];
     $col = $colour[array_rand($colour)];
     $loca = $locations[array_rand($locations)];
     $usr = $user[array_rand($user)];
     $cost = rand(5000, 1000000);
-    $imgaddr = $imgadd . $x;
+    $imgaddr = $imgadd . ($x + 220);
     //createAdvert($nam, $descript, $loca, $imgaddr, 'Caption', $col, $cost, $usr);
-    echo '<p> Added ad #' . $x;
+    echo '<p> Added ad #' . ($x + 220);
     echo "</br>";
 }
 

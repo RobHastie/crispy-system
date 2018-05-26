@@ -11,7 +11,7 @@ require_once 'Scripts/SearchFunction.php';
 session_start();
 sessionInitialize();
 
-$AdsPerPage = 12;
+$AdsPerPage = 39;
 //An easily changeable variable for the amount of ads on each page of ads
 
 if(!isset($_GET['page']) or $_GET['page'] == ""){

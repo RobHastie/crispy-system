@@ -12,7 +12,7 @@
 require_once 'SearchFunction.php';
 $array = searchAds();
 if($array != false) {
-    $length = 12;
+    $length = 30;
     $scroll = $_GET['scroll'] * $length;
     $arrayTrimmed = array_slice($array, $scroll, $length);
 }else{

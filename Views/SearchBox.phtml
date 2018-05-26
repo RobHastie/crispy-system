@@ -24,12 +24,28 @@ function multiSelected($selected){
 }
 ?>
 
+<script>
+    function liveSearch(){
+        var search = document.getElementById("adname").value;
+        var formString = "../Scripts/LiveSearch.php?search=" + search;
+        fetch(formString)
+            .then(function (resp) {
+                console.log(resp);
+                return resp.json();
+            })
+    .then(function (resp) {
 
+    })
+}
+
+</script>
 
 <div id="filters">
     <p id="preface">Input your search criteria below to find matching ads, or just hit search to look through all of them:</p>
     <div class="col-lg-6">
-        <label><p>Search by Ad name: </p><input type="text" name="adname" id="adname" <?php fillInput("adname") ?>></label>
+        <div id="liveSearch">
+        <label><p>Search by Ad name: </p><input type="text" name="adname" id="adname" <?php fillInput("adname") ?> oninput="liveSearch()"></label>
+        </div>
         <label><p>Maximum Price: £</p><input type="number" name="maxprice" id="maxprice" <?php fillInput("maxprice") ?>></label>
         <label><p>Minimum Price: £</p><input type="number" name="minprice" id="minprice" <?php fillInput("minprice") ?>></label>
     </div>
@@ -52,3 +68,4 @@ function multiSelected($selected){
         <label><input type="submit" name="submit" value="Search"></label>
     </div>
 </div>
+
