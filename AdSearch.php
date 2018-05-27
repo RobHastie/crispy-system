@@ -26,7 +26,7 @@ if(!isset($_GET['page']) or $_GET['page'] == ""){
 require_once 'Views/TopBar.phtml';
 require_once 'Views/adPage.phtml';
 
-$list = searchAds();
+$list = searchAds($AdsPerPage);
     echo '<div id="adList">';
     //Put a wrapper around the ads.
     $capped = 0;

@@ -8,7 +8,7 @@
 
 require_once 'CommonFunctions.php';
 require_once 'ListAds.php';
-function searchAds(){
+function searchAds($limit){
 //Here, we need to get a list of ads to fill the page.
 $sqlQuery = "SELECT adname, addesc, image1address, price, adID FROM classifieds";
 //This sets up the base query, which just grabs every ad.
@@ -103,7 +103,7 @@ switch($_GET['sort']){
         $sort = $sort . "datecreated DESC";
         break;
 }
-$sqlQuery = $sqlQuery . $sort;
+$sqlQuery = $sqlQuery . $sort . " LIMIT " . $limit;
 //Add the ORDER BY to the query.
 //echo $sqlQuery;
 

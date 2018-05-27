@@ -27,25 +27,26 @@ function multiSelected($selected){
 <script>
     function liveSearch(str){
         var formString = "../Scripts/LiveSearch.php?search=" + str;
-        hideLS();
 
         if (str.length==0) {
-            document.getElementById("liveSearch").innerHTML="";
-            document.getElementById("liveSearch").style.border="0px";
-            document.getElementById("liveSearch").style.opacity="0";
-            //document.getElementById("liveSearch").style.width = document.getElementById("adname").style.width;
+            hideLS();
             return;
+            //If the text input has been emptied, remove the box and stop suggesting
         }
 
         fetch(formString)
             .then(function (resp) {
                 return resp.json();
+                //Parse the response as json
             })
     .then(function (resp) {
         document.getElementById("liveSearch").style.border="1px solid #A5ACB2";
         document.getElementById("liveSearch").style.opacity="100";
+        document.getElementById("liveSearch").innerHTML="";
+        //Set the suggestion box to be visible.
         resp.forEach(function(name){
             document.getElementById("liveSearch").innerHTML += '<p onclick="clicked(this.innerHTML)">' + name + '</p></br>';
+            //For each ad name we've got, ad it to the suggestion box and give it an onclick handler
         })
     })
 }
@@ -53,11 +54,13 @@ function multiSelected($selected){
 function clicked(str){
         document.getElementById("adname").value = str;
         hideLS();
+        //This function is for when a suggestion is clicked, it sets the search boxes value to that suggestion and closes the suggestion box.
 }
 function hideLS(){
     document.getElementById("liveSearch").innerHTML="";
     document.getElementById("liveSearch").style.border="0px";
     document.getElementById("liveSearch").style.opacity="0";
+    //Empty the suggestion box and make it invisible. For when it's not in use.
 }
 </script>
 

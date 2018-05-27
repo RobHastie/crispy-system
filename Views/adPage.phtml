@@ -27,22 +27,22 @@
                 var formString = 'Scripts/InfiniteScroll.php?';
                 if(document.location.toString().indexOf('?') !== -1) {
                     var query = document.location.toString().split('?');
-                    //This sets query[1] to the get variables, so we can send them to ajax.
+                    //This sets query[1] to the get variables used in the current search.
                     formString += query[1];
                 }
                 formString += '&scroll=' + scrollCount;
-
+                //We add a get variable to the url so we can tell the php script what ads to get.
                     fetch(formString)
                         .then(function(resp){
-
-                            console.log(resp);
                             return resp.json();
                         })
                         .then(function(resp) {
                             resp.forEach(function(ad){
                                 printAd(ad);
+                                //For each ad we've got, print a thumbnail.
                             })
                             scrollCount++;
+                            //Add to the scroll count, so we don't keep pulling the same bunch of ads.
                         })
 
 
@@ -50,21 +50,11 @@
             }
         }
         function printAd(ad){
-            /*var adList;
-            adList = '<div class="col-md-6 col-lg-4 linkbox"><a href="../Advert.php?Advert=' + ad.adid + '"><div class="SmallAd">';
-            adList += '<div class="adSmall">';
-            adList += '<div class="imageWrap"><img src="../images/' + ad.image + '"></div>';
-            adList += '<h1>' + ad.adName + '</h1>';
-            adList += '<p>' + ad.description +'</p>';
-            adList += '<p>Price: £' + ad.price + '</p>';
-            adList += '</div>';
-            adList += '</div></a></div>';
-
-            document.getElementById('adList').innerHTML += adList;*/
 
             document.getElementById('adList').innerHTML += '<div class="col-md-6 col-lg-4 linkbox"><a href="../Advert.php?Advert=' + ad.adid + '"><div class="SmallAd">' +
                 '<div class="adSmall"><div class="imageWrap"><img src="../images/' + ad.image + '" onerror="this.onerror=null;this.src=\'../images/default.png\'"></div><h1>' + ad.adName + '</h1>' +
                 '<p>' + ad.description +'</p><p>Price: £' + ad.price + '</p></div></div></a></div>';
+            //Add one full advert thumbnail to the ad area.
         }
     </script>
 

@@ -10,14 +10,13 @@
 // Set the content type.
 // Send the data back.
 require_once 'SearchFunction.php';
-$array = searchAds();
-if($array != false) {
-    $length = 30;
-    $scroll = $_GET['scroll'] * $length;
-    $arrayTrimmed = array_slice($array, $scroll, $length);
-}else{
-    $arrayTrimmed = ["Test", "Testing"];
-}
+$length = 30;
+$scroll = $_GET['scroll'] * $length;
+$limit = 39 + $scroll*$length;
+//This is an easy but somewhat inefficient way of grabbing less results.
+$array = searchAds($limit);
+$arrayTrimmed = array_slice($array, $scroll, $length);
+//Cut the array we've got down to only what we need.
 $jason = json_encode($arrayTrimmed);
 echo $jason;
 ?>
